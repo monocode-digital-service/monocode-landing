@@ -1,0 +1,3 @@
+{
+  "extends": "@monocode-landing/config/tsconfig.base.json"
+}
