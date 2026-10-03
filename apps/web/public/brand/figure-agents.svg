@@ -1,0 +1,12 @@
+<svg preserveAspectRatio="none" overflow="visible" style="display: block;" width="220" height="220" viewBox="0 0 220 220" fill="none" xmlns="http://www.w3.org/2000/svg">
+<g id="Figura de linha">
+<path id="Vector" d="M110 132C122.15 132 132 122.15 132 110C132 97.8497 122.15 88 110 88C97.8497 88 88 97.8497 88 110C88 122.15 97.8497 132 110 132Z" fill="#92FF5F" stroke="#0F3B27" stroke-width="1.4"/>
+<path id="Vector_2" d="M110 110V40" stroke="#0F3B27" stroke-width="1.4"/>
+<path id="Vector_3" d="M110 53C117.18 53 123 47.1797 123 40C123 32.8203 117.18 27 110 27C102.82 27 97 32.8203 97 40C97 47.1797 102.82 53 110 53Z" fill="#F7F9F7" stroke="#0F3B27" stroke-width="1.4"/>
+<path id="Vector_4" d="M110 110L172 146" stroke="#0F3B27" stroke-width="1.4"/>
+<path id="Vector_5" d="M172 159C179.18 159 185 153.18 185 146C185 138.82 179.18 133 172 133C164.82 133 159 138.82 159 146C159 153.18 164.82 159 172 159Z" fill="#F7F9F7" stroke="#0F3B27" stroke-width="1.4"/>
+<path id="Vector_6" d="M110 110L48 146" stroke="#0F3B27" stroke-width="1.4"/>
+<path id="Vector_7" d="M48 159C55.1797 159 61 153.18 61 146C61 138.82 55.1797 133 48 133C40.8203 133 35 138.82 35 146C35 153.18 40.8203 159 48 159Z" fill="#F7F9F7" stroke="#0F3B27" stroke-width="1.4"/>
+<path id="Vector_8" d="M110 180C148.66 180 180 148.66 180 110C180 71.3401 148.66 40 110 40C71.3401 40 40 71.3401 40 110C40 148.66 71.3401 180 110 180Z" stroke="#0F3B27" stroke-dasharray="3 5"/>
+</g>
+</svg>

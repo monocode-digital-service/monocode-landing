@@ -1,110 +1,48 @@
 # monocode-landing
 
-This project was created with [Better-T-Stack](https://github.com/AmanVarshney01/create-better-t-stack), a modern TypeScript stack that combines Next.js, Self, and more.
+Site institucional da Monocode (monocode.com.br). Next.js 16, Tailwind v4 e shadcn/ui em monorepo pnpm, com deploy na Vercel.
 
-## Features
+Layout de referência: [Figma · Monocode, página "3. Site"](https://www.figma.com/design/oCXHJvibR4m9o9jwvip5LT/Monocode?node-id=118-471).
 
-- **TypeScript** - For type safety and improved developer experience
-- **Next.js** - Full-stack React framework
-- **TailwindCSS** - Utility-first CSS for rapid UI development
-- **Shared UI package** - shadcn/ui primitives live in `packages/ui`
-- **Biome** - Linting and formatting
-
-## Getting Started
-
-First, install the dependencies:
+## Desenvolvimento
 
 ```bash
 pnpm install
+pnpm dev          # http://localhost:3001
+pnpm check        # Biome (lint + format, aplica correções)
+pnpm check-types
+pnpm build
 ```
 
-Then, run the development server:
-
-```bash
-pnpm run dev
-```
-
-Open [http://localhost:3001](http://localhost:3001) in your browser to see the fullstack application.
-
-## UI Customization
-
-React web apps in this stack share shadcn/ui primitives through `packages/ui`.
-
-- Change design tokens and global styles in `packages/ui/src/styles/globals.css`
-- Update shared primitives in `packages/ui/src/components/*`
-- Adjust shadcn aliases or style config in `packages/ui/components.json` and `apps/web/components.json`
-
-### Add more shared components
-
-Run this from the project root to add more primitives to the shared UI package:
-
-```bash
-npx shadcn@latest add accordion dialog popover sheet table -c packages/ui
-```
-
-Import shared components like this:
-
-```tsx
-import { Button } from "@monocode-landing/ui/components/button";
-```
-
-### Add app-specific blocks
-
-If you want to add app-specific blocks instead of shared primitives, run the shadcn CLI from `apps/web`.
-
-## Environment Configuration
-
-Each app owns its environment schema in `.env.schema`. Varlock generates `src/env.ts` during installation; run `pnpm run env:generate` after changing a schema. Commit schemas, and keep secrets in ignored env files or your deployment platform.
-
-Import the generated `ENV` accessor in application code. Shared database and auth packages receive configuration or initialized clients from the application. See [Varlock's monorepo guide](https://varlock.dev/guides/monorepos/).
-
-Bun's automatic env loading is disabled in `bunfig.toml`; the framework integration or server bootstrap loads Varlock. Node deployments must include Varlock and its dependencies alongside the app schema.
-
-Run standalone Node/Bun tools that use Varlock from the owning app directory so they load that app's schema and env files. `env:generate` only generates TypeScript files; it does not initialize environment values in a subsequent command.
-
-## Deployment
-
-### Vercel Services
-
-- Target: web + server
-- Config: `vercel.json`
-- Link the project first: pnpm run deploy:setup
-- Local Vercel dev: pnpm run dev:vercel
-- Sync preview env: pnpm run env:preview
-- Sync production env: pnpm run env:production
-- Dry-run check (no upload): pnpm run deploy:check
-- Preview deploy: pnpm run deploy
-- Production deploy: pnpm run deploy:prod
-  Vercel Services share project environment variables, but deploys do not upload local `.env` files automatically. Link the project with `vercel link`, then run the env sync command before your first deploy (otherwise the deployment starts with no env vars), or pass one-off envs with `vercel deploy -e KEY=value`.
-  Pass Vercel CLI flags to the env sync command directly, for example: `pnpm run env:production --scope your-team`.
-
-For more details, see the guide on [Deploying to Vercel](https://www.better-t-stack.dev/docs/guides/vercel).
-
-## Git Hooks and Formatting
-
-- Run checks: `pnpm run check`
-
-## Project Structure
+## Estrutura
 
 ```
-monocode-landing/
-├── apps/
-│   └── web/         # Fullstack application (Next.js)
-├── packages/
-│   ├── ui/          # Shared shadcn/ui components and styles
+apps/web/
+├── public/brand/            # SVGs exportados do Figma (wordmark, hachuras, figuras, ícones)
+└── src/
+    ├── app/                 # layout (fontes, metadata) e página única
+    ├── lib/site.ts          # WhatsApp, e-mail, links e dados da empresa
+    └── components/
+        ├── backgrounds/     # animações React Bits (Topography, DotField), vendorizadas
+        ├── brand/           # peças de marca reutilizáveis (wordmark, rótulo de seção, tags, botão WhatsApp)
+        ├── layout/          # header e footer
+        └── sections/        # uma seção da página por arquivo
+packages/ui/                 # primitivos shadcn compartilhados + tokens em src/styles/globals.css
 ```
 
-## Available Scripts
+## UI
 
-- `pnpm run dev`: Start all applications in development mode
-- `pnpm run build`: Build all applications
-- `pnpm run dev:web`: Start only the web application
-- `pnpm run check-types`: Check TypeScript types across all apps
-- `pnpm run check`: Run Biome formatting and linting
-- `pnpm run deploy:setup`: Link this repo to a Vercel project (first-time setup)
-- `pnpm run dev:vercel`: Run the Vercel Services dev environment locally
-- `pnpm run env:preview`: Sync local env files to the Vercel preview environment
-- `pnpm run env:production`: Sync local env files to the Vercel production environment
-- `pnpm run deploy`: Create a Vercel preview deployment
-- `pnpm run deploy:prod`: Deploy to Vercel production
-- `pnpm run deploy:check`: Dry-run a deploy to preview framework detection and included files without uploading
+- Tokens da paleta Signal Move ficam em `packages/ui/src/styles/globals.css` (`bg-lime`, `text-move`, `bg-soft`, etc.).
+- Novos primitivos compartilhados: `pnpm dlx shadcn@latest add <componente> -c packages/ui`.
+- Componentes React Bits: `pnpm dlx shadcn@latest add https://reactbits.dev/r/<Nome>-TS-TW` em `apps/web`, depois mover para `components/backgrounds/`.
+
+## Variáveis de ambiente
+
+Cada app declara seu schema em `.env.schema` (Varlock). Depois de alterar o schema, rode `pnpm env:generate` para regenerar `src/env.ts`.
+
+## Deploy (Vercel)
+
+- `pnpm deploy:setup`: vincular o projeto (primeira vez)
+- `pnpm env:preview` / `pnpm env:production`: sincronizar `apps/web/.env` com a Vercel
+- `pnpm deploy:check`: dry-run
+- `pnpm deploy` / `pnpm deploy:prod`: preview / produção
