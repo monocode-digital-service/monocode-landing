@@ -20,7 +20,7 @@ export function TagList({
 				<li key={tag}>
 					<Badge
 						className={cn(
-							'h-auto rounded-[6px] px-[9px] py-1 font-mono font-normal text-move text-xs',
+							'h-auto rounded-[6px] px-2.5 py-1.5 font-mono font-normal text-[11px] text-move uppercase tracking-[0.06em]',
 							tones[tone]
 						)}
 					>

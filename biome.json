@@ -27,7 +27,10 @@
 			"!**/.svelte-kit",
 			"!**/wrangler.jsonc",
 			"!**/.source",
-			"!**/convex/_generated"
+			"!**/convex/_generated",
+			"!**/.claude",
+			"!**/.agents",
+			"!design"
 		]
 	},
 	"formatter": {
@@ -87,8 +90,17 @@
 	},
 	"overrides": [
 		{
-			"includes": ["apps/web/src/components/backgrounds/**"],
+			"includes": [
+				"apps/web/src/components/backgrounds/**",
+				"apps/web/src/components/hairline/figures/**"
+			],
 			"linter": {
+				"enabled": false
+			}
+		},
+		{
+			"includes": ["apps/web/src/components/hairline/figures/**"],
+			"formatter": {
 				"enabled": false
 			}
 		}

@@ -22,7 +22,7 @@ export function Project() {
 		<section id='projeto' className='scroll-mt-4 bg-soft text-move'>
 			<div className='mx-auto flex max-w-[1440px] flex-col gap-16 px-5 py-20 md:px-10 lg:flex-row xl:px-20 xl:py-[120px]'>
 				<div className='flex flex-col gap-[22px] lg:w-[460px] lg:shrink-0'>
-					<SectionLabel>Projeto em produção</SectionLabel>
+					<SectionLabel path='projetos/movvai' />
 					<h2 className='font-semibold text-[clamp(2.25rem,3.5vw,2.75rem)] leading-[1.08] tracking-[-0.03em]'>
 						A Monocode construiu uma agência de marketing operada por agentes de
 						IA.
@@ -55,20 +55,8 @@ export function Project() {
 
 				{/* Fluxo Movvai */}
 				<div className='relative w-full max-w-[720px] px-5 py-12 sm:px-20 sm:pt-16 sm:pb-3'>
-					<Image
-						src='/brand/hatch-flow.svg'
-						width={720}
-						height={780}
-						alt=''
-						className='absolute inset-0 -z-0 size-full'
-					/>
-					<Image
-						src='/brand/corners-flow.svg'
-						width={720}
-						height={780}
-						alt=''
-						className='absolute inset-0 size-full'
-					/>
+					<Image src='/brand/hatch-flow.svg' alt='' fill unoptimized />
+					<Image src='/brand/corners-flow.svg' alt='' fill unoptimized />
 
 					<div className='relative flex flex-wrap items-center gap-x-5 gap-y-1 text-xl'>
 						<p className='font-medium'>Uma demanda no Movvai</p>
@@ -98,10 +86,9 @@ export function Project() {
 												? '/brand/corners-step-accent.svg'
 												: '/brand/corners-step.svg'
 										}
-										width={560}
-										height={96}
 										alt=''
-										className='absolute -inset-px size-[calc(100%+2px)]'
+										fill
+										className='-inset-px! size-[calc(100%+2px)]!'
 									/>
 									<span className='font-semibold text-[22px] text-move/40'>
 										{String(i + 1).padStart(2, '0')}

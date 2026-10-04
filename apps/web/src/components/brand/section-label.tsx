@@ -1,48 +1,46 @@
 import { cn } from '@monocode-landing/ui/lib/utils'
-import Image from 'next/image'
 
 const tones = {
 	dark: {
-		root: 'border-move/35 text-move',
-		dot: '/brand/dot-dark.svg',
-		hatch: '/brand/hatch-strip-dark.svg',
+		root: 'border-move/25 text-move',
+		muted: 'text-move/45',
+		cursor: 'bg-move',
 	},
 	light: {
-		root: 'border-soft/35 text-soft',
-		dot: '/brand/dot-light.svg',
-		hatch: '/brand/hatch-strip-light.svg',
+		root: 'border-soft/25 text-soft',
+		muted: 'text-soft/45',
+		cursor: 'bg-lime',
 	},
 } as const
 
+// Rótulo de seção no formato de caminho de terminal: ~/monocode/<path>▍
 export function SectionLabel({
-	children,
+	path,
 	tone = 'dark',
 	className,
 }: {
-	children: React.ReactNode
+	path: string
 	tone?: keyof typeof tones
 	className?: string
 }) {
 	const t = tones[tone]
 	return (
-		<div
+		<p
 			className={cn(
-				'flex w-full items-center gap-4 border-y py-3.5',
+				'flex w-full items-center border-y py-3.5 font-mono text-[15px]',
 				t.root,
 				className
 			)}
 		>
-			<Image src={t.dot} width={10} height={10} alt='' className='shrink-0' />
-			<p className='shrink-0 font-mono text-[15px]'>{children}</p>
-			<div className='h-[22px] min-w-px flex-1 overflow-hidden'>
-				<Image
-					src={t.hatch}
-					width={600}
-					height={22}
-					alt=''
-					className='max-w-none'
-				/>
-			</div>
-		</div>
+			<span className={t.muted}>~/monocode/</span>
+			<span>{path}</span>
+			<span
+				aria-hidden
+				className={cn(
+					'ml-1 inline-block h-[1.1em] w-[0.6em] animate-caret motion-reduce:animate-none',
+					t.cursor
+				)}
+			/>
+		</p>
 	)
 }
