@@ -233,7 +233,10 @@ const Topography: React.FC<TopographyProps> = ({
 			alpha: true,
 			premultipliedAlpha: true,
 			antialias: false,
-			dpr: Math.min(window.devicePixelRatio || 1, 2),
+			// Monocode: 1x no celular (shader de tela cheia pesa 4x a 2x), até 2x no desktop
+			dpr: window.matchMedia('(max-width: 767px)').matches
+				? 1
+				: Math.min(window.devicePixelRatio || 1, 2),
 		})
 
 		const gl = renderer.gl
@@ -329,7 +332,14 @@ const Topography: React.FC<TopographyProps> = ({
 		let isPageVisible = !document.hidden
 		const t0 = performance.now()
 
+		// Monocode: no celular desenha a 30fps (o campo anda devagar; metade do custo de GPU/CPU)
+		const halfRate = window.matchMedia('(max-width: 767px)').matches
+		let skip = false
 		const loop = (t: number) => {
+			if (halfRate && (skip = !skip)) {
+				raf = requestAnimationFrame(loop)
+				return
+			}
 			const time = (t - t0) * 0.001
 			const u = program.uniforms
 			u.iTime.value = time

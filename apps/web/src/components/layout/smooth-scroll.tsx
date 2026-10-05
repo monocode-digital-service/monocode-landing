@@ -9,15 +9,21 @@ import { useEffect, useState } from 'react'
 const easeInOutSoft = (t: number) =>
 	t < 0.5 ? 4 * t ** 3 : 1 - (-2 * t + 2) ** 5 / 2
 
-// Scroll suave com inércia (Lenis). Com movimento reduzido fica o scroll nativo.
+// Scroll suave com inércia (Lenis) em mouse e trackpad. Toque e movimento reduzido ficam no scroll nativo.
 export function SmoothScroll() {
 	const [enabled, setEnabled] = useState(false)
 	useEffect(() => {
 		const reduced = window.matchMedia('(prefers-reduced-motion: reduce)')
-		const update = () => setEnabled(!reduced.matches)
+		// no toque o scroll nativo já tem inércia; o loop do Lenis só custaria CPU
+		const fine = window.matchMedia('(pointer: fine)')
+		const update = () => setEnabled(!reduced.matches && fine.matches)
 		update()
 		reduced.addEventListener('change', update)
-		return () => reduced.removeEventListener('change', update)
+		fine.addEventListener('change', update)
+		return () => {
+			reduced.removeEventListener('change', update)
+			fine.removeEventListener('change', update)
+		}
 	}, [])
 	if (!enabled) return null
 	return (

@@ -252,13 +252,20 @@ const DotField = memo(
 
 				ctx!.fill()
 
-				rafRef.current = requestAnimationFrame(tick)
+				// Monocode: só segue desenhando enquanto o bloco está na tela
+				rafRef.current = visible ? requestAnimationFrame(tick) : 0
 			}
 
 			doResize()
 			window.addEventListener('resize', resize)
 			window.addEventListener('mousemove', onMouseMove, { passive: true })
-			rafRef.current = requestAnimationFrame(tick)
+			let visible = false
+			const io = new IntersectionObserver(([entry]) => {
+				visible = entry.isIntersecting
+				if (visible && !rafRef.current)
+					rafRef.current = requestAnimationFrame(tick)
+			})
+			io.observe(canvas!)
 
 			rebuildRef.current = () => {
 				const { w, h } = sizeRef.current
@@ -267,6 +274,7 @@ const DotField = memo(
 
 			return () => {
 				if (rafRef.current) cancelAnimationFrame(rafRef.current)
+				io.disconnect()
 				clearInterval(speedInterval)
 				clearTimeout(resizeTimer)
 				window.removeEventListener('resize', resize)

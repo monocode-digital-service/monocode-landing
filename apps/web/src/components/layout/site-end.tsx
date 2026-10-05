@@ -1,5 +1,5 @@
-import DotField from '@/components/backgrounds/dot-field'
 import { WaveBackground } from '@/components/brand/wave-background'
+import { ClosingBackground } from '@/components/layout/backgrounds'
 import { SiteFooter } from '@/components/layout/site-footer'
 import { Closing } from '@/components/sections/closing'
 
@@ -9,12 +9,7 @@ export function SiteEnd() {
 		<div className='relative isolate text-soft'>
 			<WaveBackground className='bg-move' bottom={false} />
 			<div className='absolute inset-0 -z-10 overflow-hidden' aria-hidden>
-				<DotField
-					gradientFrom='#92FF5F'
-					gradientTo='#0F3B27'
-					dotRadius={1}
-					glowRadius={0}
-				/>
+				<ClosingBackground />
 			</div>
 			<Closing />
 			<SiteFooter />

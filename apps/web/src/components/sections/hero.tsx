@@ -1,5 +1,5 @@
-import Topography from '@/components/backgrounds/topography'
 import { WaveBottomEdge } from '@/components/brand/wave-background'
+import { HeroBackground } from '@/components/layout/backgrounds'
 import { SiteHeader } from '@/components/layout/site-header'
 
 export function Hero() {
@@ -7,13 +7,7 @@ export function Hero() {
 		<section className='relative isolate -mb-(--bend) flex min-h-[calc(max(640px,100svh)+var(--bend))] flex-col overflow-hidden bg-move-deep pb-(--bend) text-soft [--bend:80px] xl:min-h-[calc(960px+var(--bend))] md:[--bend:200px] lg:[--bend:300px]'>
 			<WaveBottomEdge />
 			<div className='absolute inset-0 -z-10' aria-hidden>
-				<Topography
-					lowColor='#92FF5F'
-					midColor='#0F3B27'
-					highColor='#FF7036'
-					speed={0.75}
-					fillBands
-				/>
+				<HeroBackground />
 				{/* Véu de leitura */}
 				<div className='pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgb(10_31_22/0.88)_0%,rgb(10_31_22/0.5)_45%,rgb(10_31_22/0)_72%)]' />
 			</div>

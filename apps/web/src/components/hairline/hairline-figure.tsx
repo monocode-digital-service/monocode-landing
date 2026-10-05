@@ -3,15 +3,15 @@
 import { cn } from '@monocode-landing/ui/lib/utils'
 import { useEffect, useRef } from 'react'
 
-import encaixe from './figures/encaixe'
-import esteira from './figures/esteira'
-import HL from './figures/kernel'
-import pasta from './figures/pasta'
-import raiox from './figures/raiox'
-import sinal from './figures/sinal'
-import turno from './figures/turno'
-
-const figures = { turno, sinal, encaixe, raiox, pasta, esteira } as const
+// Motor e figuras só são baixados quando o palco se aproxima da tela
+const figures = {
+	turno: () => import('./figures/turno'),
+	sinal: () => import('./figures/sinal'),
+	encaixe: () => import('./figures/encaixe'),
+	raiox: () => import('./figures/raiox'),
+	pasta: () => import('./figures/pasta'),
+	esteira: () => import('./figures/esteira'),
+} as const
 
 // Paletas: "light" para o painel claro de Soluções, "dark" para Como trabalhamos
 const palettes = {
@@ -50,20 +50,39 @@ export function HairlineFigure({
 	useEffect(() => {
 		const el = stage.current
 		if (!el) return
-		const figure = figures[name]
-		HL.inject(document)
-		const svg = HL.mk(
-			'svg',
-			{ viewBox: '0 0 400 320', 'aria-hidden': 'true' },
-			el
+		let cleanup = () => {}
+		let cancelled = false
+		const io = new IntersectionObserver(
+			async ([entry]) => {
+				if (!entry.isIntersecting) return
+				io.disconnect()
+				const [{ default: HL }, { default: figure }] = await Promise.all([
+					import('./figures/kernel'),
+					figures[name](),
+				])
+				if (cancelled) return
+				HL.inject(document)
+				const svg = HL.mk(
+					'svg',
+					{ viewBox: '0 0 400 320', 'aria-hidden': 'true' },
+					el
+				)
+				const handle = figure.mount(
+					{ stage: el, svg, read: { textContent: '' } },
+					figure.range[1]
+				)
+				cleanup = () => {
+					handle.destroy()
+					svg.remove()
+				}
+			},
+			{ rootMargin: '400px 0px' }
 		)
-		const handle = figure.mount(
-			{ stage: el, svg, read: { textContent: '' } },
-			figure.range[1]
-		)
+		io.observe(el)
 		return () => {
-			handle.destroy()
-			svg.remove()
+			cancelled = true
+			io.disconnect()
+			cleanup()
 		}
 	}, [name])
 
