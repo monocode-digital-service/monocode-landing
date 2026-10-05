@@ -1,5 +1,7 @@
+import Link from 'next/link'
+
 import { Wordmark } from '@/components/brand/wordmark'
-import { site } from '@/lib/site'
+import { legalLinks, site } from '@/lib/site'
 
 const label = 'font-mono text-lime text-xs uppercase tracking-[0.08em]'
 const link = 'transition-colors hover:text-soft'
@@ -12,7 +14,7 @@ export function SiteFooter() {
 					<div className='flex flex-col gap-2.5'>
 						<span className={label}>Estúdio</span>
 						<p className='leading-[1.6]'>
-							Estúdio de soluções com IA.
+							Estúdio de agentes de IA, automações e aplicações sob medida.
 							<br />
 							São Paulo, Brasil.
 						</p>
@@ -37,12 +39,16 @@ export function SiteFooter() {
 							</li>
 						</ul>
 					</div>
-					{/* TODO: páginas de política de privacidade e termos de uso */}
 					<div className='flex flex-col gap-2.5'>
 						<span className={label}>Legal</span>
 						<ul className='flex flex-col gap-1 leading-[1.6]'>
-							<li>Política de privacidade</li>
-							<li>Termos de uso</li>
+							{legalLinks.map(l => (
+								<li key={l.href}>
+									<Link href={l.href} className={link}>
+										{l.label}
+									</Link>
+								</li>
+							))}
 						</ul>
 					</div>
 					<div className='flex flex-col gap-2.5'>
