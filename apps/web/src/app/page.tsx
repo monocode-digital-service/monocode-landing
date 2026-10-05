@@ -1,6 +1,5 @@
-import { SiteFooter } from '@/components/layout/site-footer'
+import { SiteEnd } from '@/components/layout/site-end'
 import { About } from '@/components/sections/about'
-import { Closing } from '@/components/sections/closing'
 import { Hero } from '@/components/sections/hero'
 import { Method } from '@/components/sections/method'
 import { Project } from '@/components/sections/project'
@@ -15,9 +14,8 @@ export default function Home() {
 				<Method />
 				<Project />
 				<About />
-				<Closing />
 			</main>
-			<SiteFooter />
+			<SiteEnd />
 		</>
 	)
 }

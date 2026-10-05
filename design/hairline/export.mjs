@@ -18,7 +18,7 @@ writeFileSync(
 	`// @ts-nocheck\n// Gerado por design/hairline/export.mjs. Não editar.\n${kernel}\nexport default HL\n`
 )
 
-for (const name of ['turno', 'sinal', 'encaixe']) {
+for (const name of ['turno', 'sinal', 'encaixe', 'raiox', 'pasta', 'esteira']) {
 	const src = readFileSync(join(here, `${name}.js`), 'utf8')
 	const body = src
 		.replace(/=\s*HL;/, '= HL;')

@@ -17,10 +17,8 @@
 		"lucide-react": "catalog:",
 		"next": "^16.3.4",
 		"ogl": "^1.0.11",
-		"postprocessing": "^6.39.5",
 		"react": "catalog:",
 		"react-dom": "catalog:",
-		"three": "^0.180.0",
 		"varlock": "catalog:"
 	},
 	"devDependencies": {
@@ -29,7 +27,6 @@
 		"@types/node": "catalog:",
 		"@types/react": "catalog:",
 		"@types/react-dom": "catalog:",
-		"@types/three": "^0.180.0",
 		"tailwindcss": "catalog:",
 		"typescript": "catalog:"
 	}

@@ -1,6 +1,6 @@
 'use client'
 
-import { memo, useEffect, useRef } from 'react'
+import { memo, useEffect, useId, useRef } from 'react'
 
 const TWO_PI = Math.PI * 2
 
@@ -76,9 +76,8 @@ const DotField = memo(
 			gradientTo,
 		}
 		const rebuildRef = useRef<(() => void) | null>(null)
-		const glowIdRef = useRef(
-			`dot-field-glow-${Math.random().toString(36).slice(2, 9)}`
-		)
+		// useId keeps the gradient id stable between server and client render (no hydration mismatch)
+		const glowIdRef = useRef(`dot-field-glow-${useId().replace(/:/g, '')}`)
 
 		useEffect(() => {
 			const canvas = canvasRef.current
@@ -180,7 +179,7 @@ const DotField = memo(
 
 				ctx!.clearRect(0, 0, w, h)
 
-				const grad = ctx!.createLinearGradient(0, 0, w, h)
+				const grad = ctx!.createLinearGradient(0, 0, 0, h) // vertical: os pontos somem de cima para baixo
 				grad.addColorStop(0, p.gradientFrom as string)
 				grad.addColorStop(1, p.gradientTo as string)
 				ctx!.fillStyle = grad

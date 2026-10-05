@@ -10,7 +10,9 @@ const kernel = readFileSync(
 	join(here, '../../.claude/skills/hairline-create/kernel.js'),
 	'utf8'
 )
-const figures = ['turno', 'sinal', 'encaixe'].map(n =>
+const names = process.argv[2] ? process.argv[2].split(',') : ['turno', 'sinal', 'encaixe']
+const preset = process.argv[3] || ''
+const figures = names.map(n =>
 	readFileSync(join(here, `${n}.js`), 'utf8')
 )
 
@@ -66,7 +68,7 @@ const stages = figs.map(f => {
   f.mount({ stage, svg, read }, f.range[1])
   return stage
 })
-let current = Object.keys(PRESETS)[0], stroke = 1.2, size = 300
+let current = PRESETS[${JSON.stringify(preset)}] ? ${JSON.stringify(preset)} : Object.keys(PRESETS)[0], stroke = 1.2, size = 300
 function apply() {
   const c = PRESETS[current]
   row.style.background = c.bg; row.style.color = c.ink
@@ -96,5 +98,6 @@ apply()
 </body>
 </html>`
 
-writeFileSync(join(here, 'preview.html'), html)
-console.log('wrote', join(here, 'preview.html'))
+const outName = process.argv[4] || 'preview.html'
+writeFileSync(join(here, outName), html)
+console.log('wrote', join(here, outName))

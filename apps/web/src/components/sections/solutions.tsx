@@ -61,7 +61,7 @@ export function Solutions() {
 
 							<div className='flex flex-1 flex-col gap-4'>
 								<span className='font-mono text-[13px] text-move/50'>
-									{String(i + 1).padStart(3, '0')}
+									{String(i + 1).padStart(2, '0')}
 								</span>
 								<h3 className='font-semibold text-[clamp(2.75rem,4.5vw,4rem)] leading-none tracking-[-0.04em]'>
 									{s.title}

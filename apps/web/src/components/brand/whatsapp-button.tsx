@@ -3,7 +3,7 @@ import { Button } from '@monocode-landing/ui/components/button'
 import { site } from '@/lib/site'
 
 export function WhatsAppButton({
-	children = 'Chamar no WhatsApp',
+	children = 'Falar no WhatsApp',
 	size = 'pill-lg',
 	className,
 }: {

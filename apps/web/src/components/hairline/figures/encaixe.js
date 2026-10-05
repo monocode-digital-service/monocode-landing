@@ -7,7 +7,8 @@ import HL from './kernel'
  * parts made for it, a button, a chart and a form, hover over the slots cut to
  * their shape. The pointer's x closes the gap until each part sits in its slot;
  * its y picks the part that takes the bright edge and goes to the read-out.
- * At rest the parts float half open and the chart is lit. The slider is the
+ * Left alone, the parts settle into their slots and lift again, slowly, and
+ * the lit part moves on each time. The slider is the
  * widest gap, in world units.
  *
  * The pattern: scrub and pick. A spring for the gap, a pick by static screen
@@ -15,7 +16,7 @@ import HL from './kernel'
  */
 const {
   Cam, clamp, facing, fit, lerp, open, poly, prism, proj, rings, rrect, seg, extremes,
-  spring, stepS, flatDot, mk, place, pointer, put, register, disposer, solid,
+  spring, stepS, flatDot, mk, place, pointer, put, register, disposer, solid, reducedMotion,
 } = HL;
 
 const WZ = 5, PT = 4, REST_GAP = 0.55, REST_PICK = 1;
@@ -27,7 +28,7 @@ const PARTS = [
 
 function mount({ stage, svg, read }, value) {
   const bag = disposer();
-  let G = value, pick = -1;
+  let G = value, pick = -1, idleLit = -1;
   const C = Cam(45, 0.5, 2.45);
   fit(C, [[-44, -36, 0], [44, 36, 0], [44, -36, 0], [-44, 36, 0], [60, -36, 0], [60, 36, 0], [-33, -25, WZ + 34 * 1.25 + PT]], 200, 170);
   const P = proj(C), front = facing(C);
@@ -76,12 +77,29 @@ function mount({ stage, svg, read }, value) {
   function choose(i) {
     if (i === pick) return;
     pick = i;
+    idleLit = -1;
     const lit = i < 0 ? REST_PICK : i;
     parts.forEach((p) => p.el.sil.classList.toggle("hi", p.i === lit));
     read.textContent = i < 0 ? "rest" : byId(i).id;
   }
 
-  const B = register(stage, (dt) => { const m = stepS(gap, dt); draw(); return m; });
+  // Idle: with nobody pointing, the parts slowly settle into their slots and lift again,
+  // and the lit part moves to the next one each time they come up.
+  const idle = !reducedMotion();
+  function breathe(now) {
+    const t = now / 1000, w = 0.55;
+    gap.t = 0.45 + 0.4 * Math.sin(t * w);
+    const k = ((Math.floor((t * w) / (2 * Math.PI) + 0.25) % 3) + 3) % 3;
+    if (k === idleLit) return;
+    idleLit = k;
+    parts.forEach((p) => p.el.sil.classList.toggle("hi", p.i === k));
+  }
+  const B = register(stage, (dt, now) => {
+    if (pick < 0 && idle) breathe(now);
+    const m = stepS(gap, dt);
+    draw();
+    return m || (pick < 0 && idle);
+  });
   bag.add(B.unregister);
 
   // Pick bands: the screen height of each part's centre at rest, which never moves.
