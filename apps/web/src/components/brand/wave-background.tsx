@@ -89,15 +89,17 @@ function useWave(
 	}, [ref, top, bottom, parent])
 }
 
-/** Camada de fundo do bloco (cor em className), com as bordas em onda. */
+/** Camada de fundo do bloco (cor em className), com as bordas em onda. Filhos (ex.: um fundo animado) são recortados pela mesma onda. */
 export function WaveBackground({
 	className,
 	top = true,
 	bottom = true,
+	children,
 }: {
 	className?: string
 	top?: boolean
 	bottom?: boolean
+	children?: React.ReactNode
 }) {
 	const ref = useRef<HTMLDivElement>(null)
 	useWave(ref, { top, bottom })
@@ -111,7 +113,9 @@ export function WaveBackground({
 				bottom ? '-bottom-(--bend)' : 'bottom-0',
 				className
 			)}
-		/>
+		>
+			{children}
+		</div>
 	)
 }
 

@@ -7,10 +7,9 @@ import { Closing } from '@/components/sections/closing'
 export function SiteEnd() {
 	return (
 		<div className='relative isolate text-soft'>
-			<WaveBackground className='bg-move' bottom={false} />
-			<div className='absolute inset-0 -z-10 overflow-hidden' aria-hidden>
+			<WaveBackground className='overflow-hidden bg-move' bottom={false}>
 				<ClosingBackground />
-			</div>
+			</WaveBackground>
 			<Closing />
 			<SiteFooter />
 		</div>
