@@ -2,13 +2,16 @@ import Image from 'next/image'
 
 import { CornerFrame } from '@/components/brand/corner-frame'
 import { SectionLabel } from '@/components/brand/section-label'
+import { WaveBackground } from '@/components/brand/wave-background'
 import { site } from '@/lib/site'
 
 export function About() {
 	return (
-		<section id='sobre' className='scroll-mt-4 bg-[#dbe9dd] text-move'>
-			<div className='mx-auto flex max-w-[1440px] flex-col gap-12 px-5 py-20 md:px-10 lg:flex-row lg:items-center lg:gap-[72px] xl:px-20 xl:py-[120px]'>
-				<CornerFrame className='w-full max-w-[520px] shrink-0 p-2 text-move'>
+		<section id='sobre' className='relative isolate scroll-mt-4 text-move'>
+			<WaveBackground className='bg-[#dbe9dd]' bottom={false} />
+			<div className='mx-auto flex max-w-[1440px] flex-col gap-12 px-5 py-20 md:px-10 lg:flex-row lg:items-start lg:gap-[72px] xl:px-20 xl:py-[120px]'>
+				{/* cantoneiras por fora: a imagem fica na coluna do grid e no topo da linha do rótulo */}
+				<CornerFrame className='-m-2 w-[calc(100%+1rem)] max-w-[536px] shrink-0 p-2 text-move'>
 					<Image
 						src='/team/vanderson.webp'
 						alt='Vanderson Arruda, fundador da Monocode'
