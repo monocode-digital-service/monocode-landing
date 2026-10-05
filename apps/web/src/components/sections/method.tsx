@@ -1,5 +1,6 @@
 import { CornerFrame } from '@/components/brand/corner-frame'
 import { SectionLabel } from '@/components/brand/section-label'
+import { WaveBackground } from '@/components/brand/wave-background'
 import { HairlineFigure } from '@/components/hairline/hairline-figure'
 
 const steps = [
@@ -25,10 +26,8 @@ const steps = [
 
 export function Method() {
 	return (
-		<section
-			id='metodo'
-			className='relative isolate scroll-mt-4 overflow-hidden bg-move text-soft'
-		>
+		<section id='metodo' className='relative isolate scroll-mt-4 text-soft'>
+			<WaveBackground className='bg-move' />
 			<div className='mx-auto flex max-w-[1440px] flex-col gap-16 px-5 py-20 md:px-10 xl:gap-20 xl:px-20 xl:py-[110px]'>
 				<div className='flex max-w-[640px] flex-col gap-5'>
 					<SectionLabel tone='light' path='como-trabalhamos' />
