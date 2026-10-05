@@ -1,19 +1,23 @@
+import Image from 'next/image'
+
+import { CornerFrame } from '@/components/brand/corner-frame'
 import { SectionLabel } from '@/components/brand/section-label'
 import { site } from '@/lib/site'
 
 export function About() {
 	return (
-		<section
-			id='sobre'
-			className='scroll-mt-4 border-move/15 border-t bg-soft text-move'
-		>
+		<section id='sobre' className='scroll-mt-4 bg-[#dbe9dd] text-move'>
 			<div className='mx-auto flex max-w-[1440px] flex-col gap-12 px-5 py-20 md:px-10 lg:flex-row lg:items-center lg:gap-[72px] xl:px-20 xl:py-[120px]'>
-				{/* TODO: substituir pela foto do fundador (1:1) */}
-				<div className='relative aspect-square w-full max-w-[520px] shrink-0 rounded-lg border border-move/40 border-dashed bg-white'>
-					<p className='absolute bottom-6 left-6 font-mono text-[11px] text-sage'>
-						foto do fundador · 1:1
-					</p>
-				</div>
+				<CornerFrame className='w-full max-w-[520px] shrink-0 p-2 text-move'>
+					<Image
+						src='/team/vanderson.webp'
+						alt='Vanderson Arruda, fundador da Monocode'
+						width={1200}
+						height={1200}
+						sizes='(min-width: 1024px) 520px, 100vw'
+						className='aspect-square h-auto w-full object-cover'
+					/>
+				</CornerFrame>
 
 				<div className='flex flex-1 flex-col gap-5'>
 					<SectionLabel path='quem-esta-por-tras' />
