@@ -109,6 +109,9 @@ void main() {
   vec2 uv = gl_FragCoord.xy / res;
 
   vec2 suv = (uv - 0.5) / max(uScale, 0.001) + 0.5;
+  // Monocode: em tela mais estreita que 16:10 (celular em pé), recorta o campo em x em vez de esmagá-lo
+  float aspect = res.x / max(res.y, 1.0);
+  if (aspect < 1.6) suv.x = (suv.x - 0.5) * (aspect / 1.6) + 0.5;
 
   vec2 sampleUv = suv;
   if (uPixelSize > 1.0) {
