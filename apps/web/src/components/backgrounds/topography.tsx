@@ -243,9 +243,10 @@ const Topography: React.FC<TopographyProps> = ({
 		gl.clearColor(0, 0, 0, 0)
 		// Monocode: sem GPU (WebGL por software) desenha um quadro só e não anima
 		const dbg = gl.getExtension('WEBGL_debug_renderer_info')
-		const software = /swiftshader|llvmpipe|softpipe|software|basic render/i.test(
-			String(gl.getParameter(dbg ? dbg.UNMASKED_RENDERER_WEBGL : gl.RENDERER))
-		)
+		const software =
+			/swiftshader|llvmpipe|softpipe|software|basic render/i.test(
+				String(gl.getParameter(dbg ? dbg.UNMASKED_RENDERER_WEBGL : gl.RENDERER))
+			)
 		const canvas = gl.canvas as HTMLCanvasElement
 		canvas.style.width = '100%'
 		canvas.style.height = '100%'

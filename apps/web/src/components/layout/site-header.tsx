@@ -1,5 +1,6 @@
 import { WhatsAppButton } from '@/components/brand/whatsapp-button'
 import { Wordmark } from '@/components/brand/wordmark'
+import { MobileMenu } from '@/components/layout/mobile-menu'
 import { navLinks } from '@/lib/site'
 
 export function SiteHeader() {
@@ -9,7 +10,7 @@ export function SiteHeader() {
 				<a href='/' aria-label='Monocode, início'>
 					<Wordmark className='h-auto w-[168px]' />
 				</a>
-				<nav className='flex items-center gap-9'>
+				<nav className='flex items-center gap-9' aria-label='Principal'>
 					<ul className='hidden items-center gap-9 md:flex'>
 						{navLinks.map(link => (
 							<li key={link.href}>
@@ -22,7 +23,10 @@ export function SiteHeader() {
 							</li>
 						))}
 					</ul>
-					<WhatsAppButton size='pill'>Falar no WhatsApp</WhatsAppButton>
+					<WhatsAppButton size='pill' className='hidden md:inline-flex'>
+						Falar no WhatsApp
+					</WhatsAppButton>
+					<MobileMenu />
 				</nav>
 			</div>
 		</header>
