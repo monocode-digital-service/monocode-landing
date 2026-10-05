@@ -87,6 +87,10 @@ const DotField = memo(
 			if (!ctx) return
 			const dpr = Math.min(window.devicePixelRatio || 1, 2)
 			let resizeTimer: ReturnType<typeof setTimeout>
+			// Monocode: colunas e passo da grade, para desenhar só as linhas que estão na tela
+			let gridCols = 0
+			let gridStep = 1
+			let lastDraw = 0
 
 			function resize() {
 				clearTimeout(resizeTimer)
@@ -122,6 +126,8 @@ const DotField = memo(
 				const padX = (w % step) / 2
 				const padY = (h % step) / 2
 				const dots: Dot[] = new Array(rows * cols)
+				gridCols = cols
+				gridStep = step
 				let idx = 0
 
 				for (let row = 0; row < rows; row++) {
@@ -155,7 +161,13 @@ const DotField = memo(
 
 			let frameCount = 0
 
-			function tick() {
+			function tick(now: number) {
+				// Monocode: no máximo ~60 desenhos por segundo, também em telas de 120 Hz
+				if (now - lastDraw < 14) {
+					rafRef.current = visible ? requestAnimationFrame(tick) : 0
+					return
+				}
+				lastDraw = now
 				frameCount++
 				const dots = dotsRef.current
 				const m = mouseRef.current
@@ -191,7 +203,21 @@ const DotField = memo(
 
 				ctx!.beginPath()
 
-				for (let i = 0; i < len; i++) {
+				// Monocode: só as linhas da grade dentro da janela (com folga para a onda e o bulge)
+				const viewTop = window.scrollY - sizeRef.current.offsetY
+				const margin =
+					(p.waveAmplitude as number) + (p.bulgeStrength as number) + gridStep
+				const firstRow = Math.max(0, Math.floor((viewTop - margin) / gridStep))
+				const lastRow = Math.ceil(
+					(viewTop + window.innerHeight + margin) / gridStep
+				)
+				const end = Math.min(len, lastRow * gridCols)
+				// Monocode: ponto pequeno vira quadrado; em 1 px não se distingue do círculo e custa bem menos
+				const square = rad <= 1
+				// lado com a mesma área do círculo (r·√π), para o ponto não engordar
+				const side = rad * 1.772
+
+				for (let i = firstRow * gridCols; i < end; i++) {
 					const d = dots[i]
 					const dx = m.x - d.ax
 					const dy = m.y - d.ay
@@ -244,6 +270,8 @@ const DotField = memo(
 							ctx!.moveTo(drawX + rad, drawY)
 							ctx!.arc(drawX, drawY, rad, 0, TWO_PI)
 						}
+					} else if (square) {
+						ctx!.rect(drawX - side / 2, drawY - side / 2, side, side)
 					} else {
 						ctx!.moveTo(drawX + rad, drawY)
 						ctx!.arc(drawX, drawY, rad, 0, TWO_PI)
@@ -262,6 +290,10 @@ const DotField = memo(
 			let visible = false
 			const io = new IntersectionObserver(([entry]) => {
 				visible = entry.isIntersecting
+				// Monocode: reposiciona a referência de scroll a cada entrada na tela (o layout acima pode ter mudado)
+				if (visible)
+					sizeRef.current.offsetY =
+						entry.boundingClientRect.top + window.scrollY
 				if (visible && !rafRef.current)
 					rafRef.current = requestAnimationFrame(tick)
 			})
