@@ -4,7 +4,7 @@ import { SiteHeader } from '@/components/layout/site-header'
 
 export function Hero() {
 	return (
-		<section className='relative isolate -mb-(--bend) flex min-h-[calc(max(640px,100svh)+var(--bend))] flex-col overflow-hidden bg-move-deep pb-(--bend) text-soft [--bend:56px] xl:min-h-[calc(960px+var(--bend))] md:[--bend:96px]'>
+		<section className='relative isolate -mb-(--bend) flex min-h-[calc(max(640px,100svh)+var(--bend))] flex-col overflow-hidden bg-move-deep pb-(--bend) text-soft [--bend:80px] xl:min-h-[calc(960px+var(--bend))] md:[--bend:200px] lg:[--bend:300px]'>
 			<WaveBottomEdge />
 			<div className='absolute inset-0 -z-10' aria-hidden>
 				<Topography

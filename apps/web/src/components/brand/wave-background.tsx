@@ -31,10 +31,9 @@ function useWave(
 		let frame = 0
 
 		const edge = (y: number, b: number, forward: boolean) => {
-			const [x1, x2, x3, x4, end] = forward
-				? [0.25, 0.3, 0.7, 0.75, w]
-				: [0.75, 0.7, 0.3, 0.25, 0]
-			return `C${w * x1},${y} ${w * x2},${y + b} ${w * 0.5},${y + b} C${w * x3},${y + b} ${w * x4},${y} ${end},${y}`
+			// sino no meio: plano nas pontas, como no newformcap (controles a 35% e 65%)
+			const [a, c, end] = forward ? [0.35, 0.65, w] : [0.65, 0.35, 0]
+			return `C${w * a},${y} ${w * a},${y + b} ${w * 0.5},${y + b} C${w * c},${y + b} ${w * c},${y} ${end},${y}`
 		}
 		const draw = () => {
 			const b = Math.round(bend * 10) / 10
@@ -47,13 +46,14 @@ function useWave(
 			const y = window.scrollY
 			const dt = Math.max(now - lastT, 1)
 			// velocidade filtrada (px/s) e mola na curva: tira os trancos da roda do mouse
-			velocity += (((y - lastY) / dt) * 1000 - velocity) * 0.2
+			velocity += (((y - lastY) / dt) * 1000 - velocity) * 0.3
+			const moved = y !== lastY
 			lastY = y
 			lastT = now
-			const goal = Math.max(-max, Math.min(max, -velocity * 0.05))
-			bend += (goal - bend) * 0.08
+			const goal = Math.max(-max, Math.min(max, -velocity * 0.1))
+			bend += (goal - bend) * 0.15
 			draw()
-			if (Math.abs(bend) < 0.2 && Math.abs(velocity) < 2) {
+			if (!moved && Math.abs(bend) < 0.2 && Math.abs(velocity) < 2) {
 				bend = 0
 				velocity = 0
 				frame = 0
@@ -63,10 +63,10 @@ function useWave(
 			frame = requestAnimationFrame(tick)
 		}
 
+		// lastY guarda onde a página parou; o primeiro frame mede o salto desde lá
 		const onScroll = () => {
 			if (frame) return
-			lastY = window.scrollY
-			lastT = performance.now()
+			lastT = performance.now() - 16
 			frame = requestAnimationFrame(tick)
 		}
 
@@ -105,7 +105,7 @@ export function WaveBackground({
 			ref={ref}
 			aria-hidden
 			className={cn(
-				'pointer-events-none absolute inset-x-0 -z-10 [--bend:56px] md:[--bend:96px]',
+				'pointer-events-none absolute inset-x-0 -z-10 [--bend:80px] md:[--bend:200px] lg:[--bend:300px]',
 				top ? '-top-(--bend)' : 'top-0',
 				bottom ? '-bottom-(--bend)' : 'bottom-0',
 				className
