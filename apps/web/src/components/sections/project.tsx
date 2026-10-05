@@ -42,9 +42,6 @@ function FlowSlide() {
 					</li>
 				))}
 			</ol>
-			<p className='mt-5 font-mono text-[13px]'>
-				Nada é publicado sem aprovação humana.
-			</p>
 		</div>
 	)
 }
@@ -102,14 +99,16 @@ function Gallery({ project }: { project: ProjectData }) {
 					</>
 				)}
 			</CornerFrame>
-			<figcaption className='flex justify-between gap-4 font-mono text-sage text-xs'>
-				<span>{media.caption}</span>
-				{total > 1 && (
-					<span className='text-move'>
-						{pad(index + 1)} / {pad(total)}
-					</span>
-				)}
-			</figcaption>
+			{(media.caption || total > 1) && (
+				<figcaption className='flex justify-between gap-4 font-mono text-sage text-xs'>
+					<span>{media.caption}</span>
+					{total > 1 && (
+						<span className='text-move'>
+							{pad(index + 1)} / {pad(total)}
+						</span>
+					)}
+				</figcaption>
+			)}
 		</figure>
 	)
 }

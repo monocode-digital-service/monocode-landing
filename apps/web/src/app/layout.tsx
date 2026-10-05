@@ -16,9 +16,9 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-	title: 'Monocode · Soluções com IA para quem leva a operação a sério',
+	title: 'Monocode · Coloque a IA para trabalhar na sua empresa',
 	description:
-		'A Monocode desenha e constrói automações, agentes de IA e sistemas sob medida a partir de como a sua empresa já trabalha. Do software ao dispositivo físico.',
+		'Agentes de IA que decidem o próximo passo, automações que rodam sozinhas e aplicações sob medida, ligadas aos sistemas que a sua empresa já usa.',
 }
 
 export default function RootLayout({
