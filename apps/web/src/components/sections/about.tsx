@@ -9,6 +9,11 @@ export function About() {
 	return (
 		<section id='sobre' className='relative isolate scroll-mt-4 text-move'>
 			<WaveBackground className='bg-[#dbe9dd]' bottom={false} />
+			{/* continua por baixo do fechamento: quando a onda dele afunda, aparece este tom e não o branco */}
+			<div
+				aria-hidden
+				className='absolute inset-x-0 top-full -z-10 h-[300px] bg-[#dbe9dd]'
+			/>
 			<div className='mx-auto flex max-w-[1440px] flex-col gap-12 px-5 py-20 md:px-10 lg:flex-row lg:items-start lg:gap-[72px] xl:px-20 xl:py-[120px]'>
 				{/* cantoneiras por fora: a imagem fica na coluna do grid e no topo da linha do rótulo */}
 				<CornerFrame className='-m-2 w-[calc(100%+1rem)] max-w-[536px] shrink-0 p-2 text-move'>
