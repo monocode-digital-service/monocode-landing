@@ -247,6 +247,7 @@ const Topography: React.FC<TopographyProps> = ({
 			/swiftshader|llvmpipe|softpipe|software|basic render/i.test(
 				String(gl.getParameter(dbg ? dbg.UNMASKED_RENDERER_WEBGL : gl.RENDERER))
 			)
+		if (software) renderer.dpr = 1
 		const canvas = gl.canvas as HTMLCanvasElement
 		canvas.style.width = '100%'
 		canvas.style.height = '100%'
