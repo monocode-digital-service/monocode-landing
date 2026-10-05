@@ -241,6 +241,11 @@ const Topography: React.FC<TopographyProps> = ({
 
 		const gl = renderer.gl
 		gl.clearColor(0, 0, 0, 0)
+		// Monocode: sem GPU (WebGL por software) desenha um quadro só e não anima
+		const dbg = gl.getExtension('WEBGL_debug_renderer_info')
+		const software = /swiftshader|llvmpipe|softpipe|software|basic render/i.test(
+			String(gl.getParameter(dbg ? dbg.UNMASKED_RENDERER_WEBGL : gl.RENDERER))
+		)
 		const canvas = gl.canvas as HTMLCanvasElement
 		canvas.style.width = '100%'
 		canvas.style.height = '100%'
@@ -336,7 +341,7 @@ const Topography: React.FC<TopographyProps> = ({
 		const halfRate = window.matchMedia('(max-width: 767px)').matches
 		let skip = false
 		const loop = (t: number) => {
-			if (halfRate && (skip = !skip)) {
+			if (halfRate && !software && (skip = !skip)) {
 				raf = requestAnimationFrame(loop)
 				return
 			}
@@ -366,7 +371,7 @@ const Topography: React.FC<TopographyProps> = ({
 			u.uMouseActive.value = mouseActive
 
 			renderer.render({ scene: mesh })
-			raf = requestAnimationFrame(loop)
+			raf = software ? 0 : requestAnimationFrame(loop)
 		}
 
 		const tryStart = () => {
