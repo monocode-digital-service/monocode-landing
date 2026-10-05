@@ -3,6 +3,8 @@ import { Geist_Mono, Manrope } from 'next/font/google'
 
 import '../index.css'
 
+import { SmoothScroll } from '@/components/layout/smooth-scroll'
+
 const manrope = Manrope({
 	variable: '--font-manrope',
 	subsets: ['latin'],
@@ -25,8 +27,9 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang='pt-BR' className='scroll-smooth'>
+		<html lang='pt-BR'>
 			<body className={`${manrope.variable} ${geistMono.variable} antialiased`}>
+				<SmoothScroll />
 				{children}
 			</body>
 		</html>

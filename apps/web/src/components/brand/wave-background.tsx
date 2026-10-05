@@ -46,12 +46,13 @@ function useWave(
 			const y = window.scrollY
 			const dt = Math.max(now - lastT, 1)
 			// velocidade filtrada (px/s) e mola na curva: tira os trancos da roda do mouse
-			velocity += (((y - lastY) / dt) * 1000 - velocity) * 0.3
+			velocity += (((y - lastY) / dt) * 1000 - velocity) * 0.6
 			const moved = y !== lastY
 			lastY = y
 			lastT = now
-			const goal = Math.max(-max, Math.min(max, -velocity * 0.1))
-			bend += (goal - bend) * 0.15
+			// curva suave: scroll normal enverga pouco, só um scroll forte chega perto do máximo
+			const goal = -max * Math.tanh(velocity / (max * 16))
+			bend += (goal - bend) * 0.25
 			draw()
 			if (!moved && Math.abs(bend) < 0.2 && Math.abs(velocity) < 2) {
 				bend = 0
