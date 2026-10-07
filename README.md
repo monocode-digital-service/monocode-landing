@@ -34,7 +34,7 @@ apps/web/
     │   ├── projects.ts      # cases da seção Projetos
     │   └── json-ld.ts       # dados estruturados (schema.org)
     └── components/
-        ├── backgrounds/     # animações React Bits (Topography, DotField), vendorizadas
+        ├── backgrounds/     # animação React Bits (Topography), vendorizada
         ├── brand/           # peças de marca (wordmark, rótulo de seção, tags, botão WhatsApp, ondas)
         ├── hairline/        # figuras isométricas animadas (geradas a partir de design/hairline)
         ├── layout/          # header, footer, menu do celular, página legal, scroll suave
