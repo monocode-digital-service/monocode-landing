@@ -1,6 +1,6 @@
 import Link from 'next/link'
 
-import { Wordmark } from '@/components/brand/wordmark'
+import { WordmarkOutline } from '@/components/brand/wordmark-outline'
 import { legalLinks, site } from '@/lib/site'
 
 const label = 'font-mono text-lime text-xs uppercase tracking-[0.08em]'
@@ -11,7 +11,7 @@ export function SiteFooter() {
 		<footer className='text-sm text-soft/75'>
 			<div className='mx-auto max-w-[1440px] px-5 md:px-10 xl:px-20'>
 				<div className='grid gap-8 border-soft/20 border-t pt-8 sm:grid-cols-2 lg:grid-cols-4'>
-					<div className='flex flex-col gap-2.5'>
+					<div className='flex flex-col gap-2.5' data-reveal='up'>
 						<span className={label}>Estúdio</span>
 						<p className='leading-[1.6]'>
 							Estúdio de agentes de IA, automações e aplicações sob medida.
@@ -19,7 +19,7 @@ export function SiteFooter() {
 							São Paulo, Brasil.
 						</p>
 					</div>
-					<div className='flex flex-col gap-2.5'>
+					<div className='flex flex-col gap-2.5' data-reveal='up'>
 						<span className={label}>Contato</span>
 						<ul className='flex flex-col gap-1 leading-[1.6]'>
 							<li>
@@ -39,7 +39,7 @@ export function SiteFooter() {
 							</li>
 						</ul>
 					</div>
-					<div className='flex flex-col gap-2.5'>
+					<div className='flex flex-col gap-2.5' data-reveal='up'>
 						<span className={label}>Legal</span>
 						<ul className='flex flex-col gap-1 leading-[1.6]'>
 							{legalLinks.map(l => (
@@ -51,7 +51,7 @@ export function SiteFooter() {
 							))}
 						</ul>
 					</div>
-					<div className='flex flex-col gap-2.5'>
+					<div className='flex flex-col gap-2.5' data-reveal='up'>
 						<span className={label}>Empresa</span>
 						<p className='leading-[1.6]'>
 							{site.legalName}
@@ -63,7 +63,7 @@ export function SiteFooter() {
 			</div>
 			{/* Wordmark em contorno, cortado pela base do bloco */}
 			<div className='mx-auto mt-16 max-w-[1440px] overflow-hidden px-5 md:px-10 xl:px-[70px]'>
-				<Wordmark size='outline' className='-mb-[3%] h-auto w-full' />
+				<WordmarkOutline className='-mb-[3%] h-auto w-full' />
 			</div>
 		</footer>
 	)

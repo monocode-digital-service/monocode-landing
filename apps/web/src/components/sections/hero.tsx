@@ -14,11 +14,20 @@ export function Hero() {
 
 			<SiteHeader />
 
-			<div className='pointer-events-none mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end px-5 pt-40 pb-16 md:px-10 xl:px-20 xl:pb-[110px]'>
-				<h1 className='max-w-[980px] font-semibold text-[clamp(3rem,7.2vw,6.5rem)] leading-[0.94] tracking-[-0.05em]'>
+			<div
+				data-parallax
+				className='pointer-events-none mx-auto flex w-full max-w-[1440px] flex-1 flex-col justify-end px-5 pt-40 pb-16 md:px-10 xl:px-20 xl:pb-[110px]'
+			>
+				<h1
+					data-reveal='lines'
+					className='max-w-[980px] font-semibold text-[clamp(3rem,7.2vw,6.5rem)] leading-[0.94] tracking-[-0.05em]'
+				>
 					Coloque a IA para trabalhar na sua empresa.
 				</h1>
-				<p className='mt-12 max-w-[520px] text-[17px] text-soft/82 leading-[1.55] xl:mt-[90px]'>
+				<p
+					data-reveal='up'
+					className='mt-12 max-w-[520px] text-[17px] text-soft/82 leading-[1.55] xl:mt-[90px]'
+				>
 					Muita empresa testou IA e parou no chat. Aqui ela passa a trabalhar no
 					atendimento, no comercial, no marketing e no backoffice: agentes que
 					decidem o próximo passo, automações que rodam sozinhas e aplicações

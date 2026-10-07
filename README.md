@@ -37,7 +37,7 @@ apps/web/
         ├── backgrounds/     # animação React Bits (Topography), vendorizada
         ├── brand/           # peças de marca (wordmark, rótulo de seção, tags, botão WhatsApp, ondas)
         ├── hairline/        # figuras isométricas animadas (geradas a partir de design/hairline)
-        ├── layout/          # header, footer, menu do celular, página legal, scroll suave
+        ├── layout/          # header, footer, menu do celular, página legal, scroll suave, animações (site-motion)
         └── sections/        # uma seção da página por arquivo
 design/
 ├── hairline/                # fontes das figuras e scripts de exportação

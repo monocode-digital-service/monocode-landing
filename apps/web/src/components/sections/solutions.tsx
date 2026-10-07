@@ -46,7 +46,10 @@ export function Solutions() {
 			<div className='mx-auto flex max-w-[1440px] flex-col gap-16 px-5 py-20 md:px-10 xl:gap-20 xl:px-20 xl:py-[120px]'>
 				<div className='flex flex-col gap-8'>
 					<SectionLabel path='solucoes' />
-					<h2 className='max-w-[640px] font-semibold text-[clamp(2.5rem,4.5vw,3.5rem)] leading-[1.02] tracking-[-0.03em]'>
+					<h2
+						data-reveal='lines'
+						className='max-w-[640px] font-semibold text-[clamp(2.5rem,4.5vw,3.5rem)] leading-[1.02] tracking-[-0.03em]'
+					>
 						O que construímos para a sua operação.
 					</h2>
 				</div>
@@ -60,21 +63,37 @@ export function Solutions() {
 								i % 2 === 1 && 'lg:flex-row-reverse'
 							)}
 						>
-							<figure className='w-full shrink-0 lg:w-[min(640px,48%)]'>
+							<figure
+								data-reveal='scale'
+								className='w-full shrink-0 lg:w-[min(640px,48%)]'
+							>
 								<CornerFrame className='flex aspect-[5/4] w-full items-center bg-[#f5f8f5] bg-hatch text-move'>
 									<HairlineFigure name={s.figure} label={s.figureLabel} />
 								</CornerFrame>
 							</figure>
 
 							<div className='flex flex-1 flex-col gap-4'>
-								<span className='font-mono text-[13px] text-move/50'>
+								<span
+									data-reveal='up'
+									className='font-mono text-[13px] text-move/50'
+								>
 									{String(i + 1).padStart(2, '0')}
 								</span>
-								<h3 className='font-semibold text-[clamp(2rem,3.6vw,3.25rem)] leading-none tracking-[-0.04em] lg:whitespace-nowrap'>
+								<h3
+									data-reveal='lines'
+									className='font-semibold text-[clamp(2rem,3.6vw,3.25rem)] leading-none tracking-[-0.04em] lg:whitespace-nowrap'
+								>
 									{s.title}
 								</h3>
-								<p className='mt-2 font-semibold text-xl'>{s.lead}</p>
-								<p className='text-base text-move/80 leading-[1.6]'>{s.body}</p>
+								<p data-reveal='up' className='mt-2 font-semibold text-xl'>
+									{s.lead}
+								</p>
+								<p
+									data-reveal='up'
+									className='text-base text-move/80 leading-[1.6]'
+								>
+									{s.body}
+								</p>
 								<TagList tags={s.tags} tone={s.tone} />
 							</div>
 						</li>

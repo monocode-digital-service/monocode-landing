@@ -19,7 +19,10 @@ export function About() {
 				<div className='flex flex-col gap-12 lg:flex-row lg:gap-[72px]'>
 					{/* cantoneiras por fora; no desktop a foto acompanha a altura do texto */}
 					<CornerFrame className='-m-2 w-[calc(100%+1rem)] max-w-[536px] shrink-0 p-2 text-move lg:w-[min(536px,42%)]'>
-						<div className='relative aspect-square lg:aspect-auto lg:h-full'>
+						<div
+							data-reveal='wipe'
+							className='relative aspect-square lg:aspect-auto lg:h-full'
+						>
 							<Image
 								src='/team/vanderson.webp'
 								alt='Vanderson Arruda, fundador da Monocode'
@@ -31,10 +34,16 @@ export function About() {
 					</CornerFrame>
 
 					<div className='flex flex-1 flex-col gap-5'>
-						<h2 className='font-semibold text-[clamp(2.5rem,4.2vw,3.25rem)] leading-[1.02] tracking-[-0.03em]'>
+						<h2
+							data-reveal='lines'
+							className='font-semibold text-[clamp(2.5rem,4.2vw,3.25rem)] leading-[1.02] tracking-[-0.03em]'
+						>
 							25 anos de engenharia, agora dedicados a IA aplicada.
 						</h2>
-						<div className='flex flex-col gap-5 text-[17px] leading-[1.6]'>
+						<div
+							data-reveal='up'
+							className='flex flex-col gap-5 text-[17px] leading-[1.6]'
+						>
 							<p>
 								Por trás da Monocode está Vanderson Arruda, engenheiro de
 								software há 25 anos. Boa parte desse tempo foi em agências como
@@ -55,7 +64,10 @@ export function About() {
 								resolvido com código.
 							</p>
 						</div>
-						<div className='flex gap-7 font-semibold text-base'>
+						<div
+							data-reveal='up'
+							className='flex gap-7 font-semibold text-base'
+						>
 							<a
 								href={site.founderLinkedinUrl}
 								target='_blank'

@@ -26,6 +26,7 @@ export function SectionLabel({
 	const t = tones[tone]
 	return (
 		<p
+			data-reveal='up'
 			className={cn(
 				'flex w-full items-center border-y py-3.5 font-mono text-[15px]',
 				t.root,

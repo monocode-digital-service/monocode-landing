@@ -3,6 +3,7 @@ import { Geist_Mono, Manrope } from 'next/font/google'
 
 import '../index.css'
 
+import { SiteMotion } from '@/components/layout/site-motion'
 import { SmoothScroll } from '@/components/layout/smooth-scroll'
 import { site } from '@/lib/site'
 
@@ -39,10 +40,17 @@ export default function RootLayout({
 	children: React.ReactNode
 }>) {
 	return (
-		<html lang='pt-BR'>
+		<html lang='pt-BR' suppressHydrationWarning>
 			<body className={`${manrope.variable} ${geistMono.variable} antialiased`}>
+				{/* marca que há JS antes da primeira pintura: o CSS esconde os elementos animados só nesse caso */}
+				<script
+					dangerouslySetInnerHTML={{
+						__html: "document.documentElement.classList.add('js')",
+					}}
+				/>
 				<SmoothScroll />
 				{children}
+				<SiteMotion />
 			</body>
 		</html>
 	)

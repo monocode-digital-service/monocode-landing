@@ -3,7 +3,6 @@ import Image from 'next/image'
 // Wordmark vetorial (Figma: Logo/Wordmark e Logo/Wordmark · contorno).
 const sizes = {
 	sm: { src: '/brand/wordmark.svg', width: 168, height: 25 },
-	outline: { src: '/brand/wordmark-outline.svg', width: 421, height: 65 },
 } as const
 
 export function Wordmark({

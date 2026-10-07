@@ -31,7 +31,10 @@ export function Method() {
 			<div className='mx-auto flex max-w-[1440px] flex-col gap-16 px-5 py-20 md:px-10 xl:gap-20 xl:px-20 xl:py-[110px]'>
 				<div className='flex flex-col gap-8'>
 					<SectionLabel tone='light' path='como-trabalhamos' />
-					<h2 className='max-w-[640px] font-semibold text-[clamp(2.5rem,4.5vw,3.5rem)] leading-[1.02] tracking-[-0.03em]'>
+					<h2
+						data-reveal='lines'
+						className='max-w-[640px] font-semibold text-[clamp(2.5rem,4.5vw,3.5rem)] leading-[1.02] tracking-[-0.03em]'
+					>
 						Primeiro entender.
 						<br />
 						Depois construir.
@@ -42,6 +45,7 @@ export function Method() {
 					{steps.map((step, i) => (
 						<li
 							key={step.title}
+							data-reveal='up'
 							className='flex flex-col gap-6 border-soft/15 border-b py-8 md:border-b-0 md:not-first:border-l md:px-8'
 						>
 							<div className='flex items-baseline justify-between gap-4'>

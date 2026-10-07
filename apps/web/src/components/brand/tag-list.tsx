@@ -15,7 +15,7 @@ export function TagList({
 	tone: keyof typeof tones
 }) {
 	return (
-		<ul className='flex flex-wrap gap-1.5'>
+		<ul className='flex flex-wrap gap-1.5' data-reveal='up'>
 			{tags.map(tag => (
 				<li key={tag}>
 					<Badge

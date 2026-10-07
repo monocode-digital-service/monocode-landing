@@ -55,7 +55,7 @@ function Gallery({ project }: { project: ProjectData }) {
 		'absolute top-1/2 z-10 flex size-12 -translate-y-1/2 items-center justify-center rounded-full border border-lime/50 bg-move/80 font-mono text-lg text-lime transition-colors hover:bg-move'
 
 	return (
-		<figure className='flex w-full flex-col gap-4'>
+		<figure data-reveal='scale' className='flex w-full flex-col gap-4'>
 			<CornerFrame className='overflow-hidden bg-move text-move lg:aspect-[16/10]'>
 				{media.kind === 'flow' && <FlowSlide />}
 				{media.kind === 'image' && (
@@ -134,10 +134,13 @@ export function Project() {
 					</div>
 					<div className='flex flex-col gap-12 lg:flex-row lg:gap-16'>
 						<div className='flex flex-col gap-[22px] lg:w-[460px] lg:shrink-0'>
-							<h2 className='font-semibold text-[clamp(2.25rem,3.5vw,2.75rem)] leading-[1.08] tracking-[-0.03em]'>
+							<h2
+								data-reveal='lines'
+								className='font-semibold text-[clamp(2.25rem,3.5vw,2.75rem)] leading-[1.08] tracking-[-0.03em]'
+							>
 								{project.title}
 							</h2>
-							<dl>
+							<dl data-reveal='up'>
 								{project.facts.map(f => (
 									<div
 										key={f.label}
@@ -150,7 +153,10 @@ export function Project() {
 									</div>
 								))}
 							</dl>
-							<p className='text-base text-move/80 leading-[1.6]'>
+							<p
+								data-reveal='up'
+								className='text-base text-move/80 leading-[1.6]'
+							>
 								{project.body}
 							</p>
 						</div>
