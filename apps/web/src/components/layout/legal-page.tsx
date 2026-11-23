@@ -1,7 +1,6 @@
 import { SiteFooter } from '@/components/layout/site-footer'
-import { SiteHeader } from '@/components/layout/site-header'
 
-// Página de texto legal: faixa do header, texto corrido e o footer do site.
+// Página de texto legal: faixa escura atrás do cabeçalho (que é fixo e vem do layout), texto corrido e o footer do site.
 export function LegalPage({
 	title,
 	updated,
@@ -13,9 +12,7 @@ export function LegalPage({
 }) {
 	return (
 		<>
-			<div className='relative h-[108px] bg-move-deep'>
-				<SiteHeader />
-			</div>
+			<div className='h-[108px] bg-move-deep' />
 			<main className='bg-soft text-ink'>
 				<article className='mx-auto flex max-w-[1440px] flex-col gap-10 px-5 py-20 md:px-10 xl:px-20 xl:py-[120px]'>
 					<header className='flex flex-col gap-4'>

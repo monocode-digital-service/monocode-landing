@@ -1,7 +1,6 @@
 import { WaveBottomEdge } from '@/components/brand/wave-background'
 import { WhatsAppButton } from '@/components/brand/whatsapp-button'
 import { HeroBackground } from '@/components/layout/backgrounds'
-import { SiteHeader } from '@/components/layout/site-header'
 
 export function Hero() {
 	return (
@@ -13,8 +12,6 @@ export function Hero() {
 				{/* Véu de leitura */}
 				<div className='pointer-events-none absolute inset-0 bg-[linear-gradient(90deg,rgb(10_31_22/0.88)_0%,rgb(10_31_22/0.5)_45%,rgb(10_31_22/0)_72%)]' />
 			</div>
-
-			<SiteHeader />
 
 			<div
 				data-parallax

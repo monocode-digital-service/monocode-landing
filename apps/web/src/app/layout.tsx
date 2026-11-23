@@ -3,6 +3,9 @@ import { Geist_Mono, Manrope } from 'next/font/google'
 
 import '../index.css'
 
+import { BackToTop } from '@/components/layout/back-to-top'
+import { ScrollState } from '@/components/layout/scroll-state'
+import { SiteHeader } from '@/components/layout/site-header'
 import { SiteMotion } from '@/components/layout/site-motion'
 import { SmoothScroll } from '@/components/layout/smooth-scroll'
 import { openGraphBase } from '@/lib/metadata'
@@ -48,7 +51,10 @@ export default function RootLayout({
 					}}
 				/>
 				<SmoothScroll />
+				<ScrollState />
+				<SiteHeader />
 				{children}
+				<BackToTop />
 				<SiteMotion />
 			</body>
 		</html>
