@@ -10,7 +10,8 @@
 /* Monocode · paleta na proporção 60-30-10:
    60 papel (soft no fundo das seções claras, paper nos cartões e na seção Sobre);
    30 verde-escuro da marca (move, move-deep: hero, método, fechamento);
-   10 acentos (lime só sobre verde-escuro; orange para a aprovação humana e o destaque das ilustrações).
+   10 acentos (lime só sobre superfície escura: os blocos verde-escuros e os painéis ink e ink-deep, nunca
+   sobre o papel; orange para a aprovação humana e o destaque das ilustrações).
    Nas seções claras o texto é ink, um quase-preto neutro: o verde fica para os blocos escuros.
    ochre e petrol são cores de apoio, só dentro de elementos (selos e ilustrações), nunca em fundo ou texto.
    Contrastes conferidos: ink 15:1 e ink-soft 5,9:1 sobre soft; ink 4,7:1 sobre orange; orange 3,4:1 sobre
@@ -161,6 +162,11 @@
 	:focus-visible {
 		outline: 2px solid var(--color-orange);
 		outline-offset: 3px;
+	}
+	/* Seção que recebe o foco por um clique de âncora (smooth-scroll.tsx): o foco é só o ponto de partida
+	   do próximo Tab, então não leva o contorno em volta da seção inteira. */
+	section[tabindex="-1"]:focus-visible {
+		outline: none;
 	}
 }
 

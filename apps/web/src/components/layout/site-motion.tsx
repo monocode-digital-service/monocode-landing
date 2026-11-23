@@ -114,6 +114,23 @@ export function SiteMotion() {
 					})
 				}
 
+				// A altura da página muda depois que os gatilhos são criados: troca de frente, passos que abrem no
+				// celular, fontes e figuras que terminam de carregar. Os gatilhos guardam posições, então são
+				// recalculados; sem isso as seções abaixo entrariam atrasadas, com áreas em branco na tela.
+				let height = document.documentElement.scrollHeight
+				let timer = 0
+				const resize = new ResizeObserver(() => {
+					window.clearTimeout(timer)
+					timer = window.setTimeout(() => {
+						const now = document.documentElement.scrollHeight
+						if (now === height) return
+						height = now
+						// true: espera a rolagem em curso terminar antes de medir
+						ScrollTrigger.refresh(true)
+					}, 150)
+				})
+				resize.observe(document.body)
+
 				for (const el of gsap.utils.toArray<HTMLElement>('[data-parallax]')) {
 					gsap.to(el, {
 						yPercent: -30,
@@ -125,6 +142,12 @@ export function SiteMotion() {
 							scrub: true,
 						},
 					})
+				}
+
+				// ao trocar de rota ou sair de "sem movimento reduzido", o observador de altura sai junto
+				return () => {
+					resize.disconnect()
+					window.clearTimeout(timer)
 				}
 			})
 		},

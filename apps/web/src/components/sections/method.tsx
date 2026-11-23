@@ -54,6 +54,16 @@ const span = (from: number, to: number) =>
 const cell =
 	'[grid-column:var(--from)_/_calc(var(--to)_+_1)] lg:[grid-column:calc(var(--from)_+_1)_/_calc(var(--to)_+_2)]'
 
+// Divisórias entre os cartões, pela posição de cada um na grade de 1, 2 e 4 colunas. Ficam no próprio cartão
+// (e não num fundo da grade aparecendo pelos vãos) porque os cartões entram escondidos: o fundo da grade
+// apareceria sozinho, como uma placa clara, antes deles.
+const dividers = [
+	'',
+	'border-t md:border-t-0 md:border-l',
+	'border-t xl:border-t-0 xl:border-l',
+	'border-t md:border-l xl:border-t-0',
+]
+
 export function Method() {
 	return (
 		<section id='metodo' className='relative isolate scroll-mt-4 text-soft'>
@@ -71,12 +81,15 @@ export function Method() {
 					</h2>
 				</div>
 
-				<ol className='grid gap-px overflow-hidden rounded-lg border border-soft/15 bg-soft/15 md:grid-cols-2 xl:grid-cols-4'>
+				<ol className='grid overflow-hidden rounded-lg border border-soft/15 md:grid-cols-2 xl:grid-cols-4'>
 					{steps.map((step, i) => (
 						<li
 							key={step.title}
 							data-reveal='up'
-							className='flex flex-col gap-[22px] bg-move px-6 pt-[26px] pb-7'
+							className={cn(
+								'flex flex-col gap-[22px] border-soft/15 bg-move px-6 pt-[26px] pb-7',
+								dividers[i]
+							)}
 						>
 							<h3 className='font-semibold text-[28px] leading-[1.1] tracking-[-0.02em]'>
 								<span className='mr-[0.22em] text-lime'>{pad(i + 1)}</span>{' '}

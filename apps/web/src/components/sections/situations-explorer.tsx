@@ -1,6 +1,7 @@
 'use client'
 
 import { cn } from '@monocode-landing/ui/lib/utils'
+import { useLenis } from 'lenis/react'
 import { ArrowRight } from 'lucide-react'
 import { useLayoutEffect, useRef, useState } from 'react'
 
@@ -103,6 +104,8 @@ export function SituationsExplorer({ fronts }: { fronts: readonly Front[] }) {
 	const stepsKey = `${front.id}-${index}`
 	const tabs = useRef<(HTMLButtonElement | null)[]>([])
 	const selectFront = (i: number) => {
+		// a frente já escolhida não reinicia a situação
+		if (i === frontIndex) return
 		setFrontIndex(i)
 		setIndex(0)
 	}
@@ -124,6 +127,28 @@ export function SituationsExplorer({ fronts }: { fronts: readonly Front[] }) {
 		observer.observe(list.current)
 		return () => observer.disconnect()
 	}, [index, frontIndex])
+
+	// No celular os passos abrem logo abaixo da situação tocada e os da anterior somem. Quando a anterior
+	// está acima, a lista encolhe antes do ponto do toque e a linha tocada subiria para fora da tela.
+	// Guarda onde a linha estava e, depois da troca, rola a diferença: ela fica onde o dedo a deixou.
+	// No desktop os passos ficam no painel ao lado, a linha não sai do lugar e nada é rolado.
+	const lenis = useLenis()
+	const anchor = useRef<{ row: HTMLElement; top: number } | null>(null)
+	const select = (i: number) => {
+		const row = rows.current[i]
+		if (row) anchor.current = { row, top: row.getBoundingClientRect().top }
+		setIndex(i)
+	}
+	// biome-ignore lint/correctness/useExhaustiveDependencies: roda depois de cada troca de situação
+	useLayoutEffect(() => {
+		const from = anchor.current
+		anchor.current = null
+		if (!from) return
+		const delta = from.row.getBoundingClientRect().top - from.top
+		if (Math.abs(delta) < 1) return
+		if (lenis) lenis.scrollTo(window.scrollY + delta, { immediate: true })
+		else window.scrollBy(0, delta)
+	}, [index, lenis])
 
 	return (
 		<div className='flex flex-col'>
@@ -234,7 +259,7 @@ export function SituationsExplorer({ fronts }: { fronts: readonly Front[] }) {
 										ref={el => {
 											rows.current[i] = el
 										}}
-										onClick={() => setIndex(i)}
+										onClick={() => select(i)}
 										className={cn(
 											'relative flex w-full items-start gap-[22px] px-5 pt-5 pb-[22px] text-left transition-colors duration-300',
 											// antes da primeira medida a própria linha leva o fundo, para o texto claro nunca ficar sem ele

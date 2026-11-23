@@ -27,7 +27,7 @@ const capsule = {
 /**
  * Cabeçalho fixo, montado uma vez no layout. No topo da página fica transparente sobre o bloco escuro
  * (o hero ou a faixa das páginas legais), com logo em lime e menu claro. Depois de rolar (data-scrolled no
- * <html>, ver scroll-state.tsx) vira uma cápsula flutuante de vidro fosco claro e as cores passam para o ink.
+ * <html>, marcado pelo script do layout) vira uma cápsula flutuante de vidro fosco claro e as cores passam para o ink.
  * O botão também escurece, porque o lime só entra sobre verde-escuro.
  *
  * A cápsula surge em volta do logo e do menu onde eles já estão (mesma altura, bordas a --pad-l e --pad-r
@@ -38,7 +38,7 @@ export function SiteHeader() {
 	return (
 		<header
 			style={capsule}
-			className='pointer-events-none fixed inset-x-0 top-0 z-40 pt-8 [--cap-m:12px] [--gutter:20px] [--nav-accent:var(--color-lime)] [--nav-fg:var(--color-soft)] [--pad-l:18px] [--pad-r:8px] [container-type:inline-size] in-data-scrolled:[--nav-accent:var(--color-ink)] in-data-scrolled:[--nav-fg:var(--color-ink)] in-data-scrolled:[--primary-foreground:var(--color-soft)] in-data-scrolled:[--primary:var(--color-ink)] md:[--gutter:40px] md:[--pad-l:28px] lg:[--cap-m:20px] xl:[--cap-m:48px] xl:[--gutter:80px]'
+			className='pointer-events-none in-[.js]:fixed absolute inset-x-0 top-0 z-40 pt-8 [--cap-m:12px] [--gutter:20px] [--nav-accent:var(--color-lime)] [--nav-fg:var(--color-soft)] [--pad-l:18px] [--pad-r:8px] [container-type:inline-size] in-data-scrolled:[--nav-accent:var(--color-ink)] in-data-scrolled:[--nav-fg:var(--color-ink)] in-data-scrolled:[--primary-foreground:var(--color-soft)] in-data-scrolled:[--primary:var(--color-ink)] md:[--gutter:40px] md:[--pad-l:28px] lg:[--cap-m:20px] xl:[--cap-m:48px] xl:[--gutter:80px]'
 		>
 			{/* Fundo da cápsula: 60px de altura, centrado na linha (que fica a 32px do topo e tem 44px) */}
 			<div
