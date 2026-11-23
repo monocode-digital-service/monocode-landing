@@ -15,7 +15,7 @@ const mail = <a href={`mailto:${site.email}`}>{site.email}</a>
 
 export default function PoliticaDePrivacidade() {
 	return (
-		<LegalPage title='Política de privacidade' updated='5 de outubro de 2026'>
+		<LegalPage title='Política de privacidade' updated='23 de novembro de 2026'>
 			<p>
 				Esta política explica quais dados pessoais a Monocode trata quando você
 				visita este site ou entra em contato, para que eles são usados e quais
@@ -36,6 +36,14 @@ export default function PoliticaDePrivacidade() {
 					Dados de navegação: endereço IP, tipo de navegador e de dispositivo,
 					páginas acessadas, data e hora. São registrados automaticamente pelos
 					provedores que hospedam e protegem o site.
+				</li>
+				<li>
+					Medição de audiência: o site usa o Cloudflare Web Analytics para saber
+					quantas visitas recebe, quais páginas são vistas, de que site e de que
+					país as visitas chegam, o tipo de navegador, de sistema e de
+					dispositivo, e quanto tempo as páginas levam para carregar. A medição
+					não usa cookies nem outro armazenamento no seu navegador e não
+					acompanha você em outros sites.
 				</li>
 				<li>
 					Dados de contato: quando você escreve pelo WhatsApp ou por e-mail, a
@@ -59,6 +67,10 @@ export default function PoliticaDePrivacidade() {
 					Manter o site funcionando com segurança e prevenir abuso (legítimo
 					interesse).
 				</li>
+				<li>
+					Medir a audiência do site em números agregados, para melhorar o
+					conteúdo e o desempenho (legítimo interesse).
+				</li>
 				<li>Cumprir obrigações legais e regulatórias.</li>
 			</ul>
 			<p>
@@ -78,17 +90,19 @@ export default function PoliticaDePrivacidade() {
 			<p>
 				Os dados são compartilhados apenas com fornecedores que prestam serviço
 				à Monocode e só na medida necessária: hospedagem e entrega do site,
-				WhatsApp, e-mail, ferramentas de gestão de atendimento e provedores de
-				IA que processam a conversa quando o agente atua. Alguns desses
-				fornecedores processam dados fora do Brasil. Nesses casos, a
-				transferência segue as regras da LGPD para transferência internacional.
+				medição de audiência, WhatsApp, e-mail, ferramentas de gestão de
+				atendimento e provedores de IA que processam a conversa quando o agente
+				atua. Alguns desses fornecedores processam dados fora do Brasil. Nesses
+				casos, a transferência segue as regras da LGPD para transferência
+				internacional.
 			</p>
 
 			<h2>6. Cookies</h2>
 			<p>
-				Este site não usa cookies de publicidade nem de rastreamento. Os
-				provedores de infraestrutura podem usar cookies estritamente necessários
-				para segurança e funcionamento.
+				Este site não usa cookies de publicidade nem de rastreamento, e a
+				medição de audiência é feita sem cookies. Os provedores de
+				infraestrutura podem usar cookies estritamente necessários para
+				segurança e funcionamento.
 			</p>
 
 			<h2>7. Por quanto tempo os dados ficam guardados</h2>
