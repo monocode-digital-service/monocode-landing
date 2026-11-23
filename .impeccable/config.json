@@ -1,0 +1,28 @@
+{
+	"detector": {
+		"ignoreRules": [],
+		"ignoreFiles": [],
+		"ignoreValues": [
+			{
+				"rule": "overused-font",
+				"value": "geist mono",
+				"createdAt": "2026-11-23T18:03:58.628Z",
+				"reason": "CLAUDE.md do projeto: as fontes da marca sao Manrope e Geist Mono"
+			},
+			{
+				"rule": "oversized-h1",
+				"value": "*",
+				"files": ["design/og/og.html"],
+				"createdAt": "2026-11-23T18:03:58.657Z",
+				"reason": "og.html e a fonte da imagem de compartilhamento 1200x630 (CLAUDE.md, OG image): o titulo e o conteudo inteiro da imagem"
+			},
+			{
+				"rule": "low-contrast",
+				"value": "*",
+				"files": ["design/og/og.html"],
+				"createdAt": "2026-11-23T20:11:08.552Z",
+				"reason": "O detector calcula contra fundo branco: nao le o degrade verde-escuro do body (#0a2a1b a #14502f). No fundo real (#0a2a1b) o titulo da 14,0:1, o lime 12,3:1 e o prefixo do caminho 5,9:1. Conferir o contraste deste arquivo a mao"
+			}
+		]
+	}
+}

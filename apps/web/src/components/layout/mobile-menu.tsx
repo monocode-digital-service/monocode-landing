@@ -18,7 +18,7 @@ export function MobileMenu() {
 				type='button'
 				popoverTarget='mobile-menu'
 				aria-label='Abrir menu'
-				className='flex size-11 items-center justify-center rounded-full border border-soft/30 text-soft md:hidden'
+				className='flex size-11 items-center justify-center rounded-full border border-(--nav-fg)/30 text-(--nav-fg) transition-colors duration-300 md:hidden'
 			>
 				<Menu className='size-5' />
 			</button>
@@ -26,7 +26,8 @@ export function MobileMenu() {
 				ref={panel}
 				id='mobile-menu'
 				popover='auto'
-				className='m-0 h-dvh max-h-none w-full max-w-none border-0 bg-move-deep p-0 text-soft'
+				// o painel é sempre escuro: devolve ao botão o lime que o cabeçalho troca por ink quando vira cápsula
+				className='m-0 h-dvh max-h-none w-full max-w-none border-0 bg-move-deep p-0 text-soft [--primary-foreground:var(--color-move)] [--primary:var(--color-lime)]'
 			>
 				<div className='flex h-full flex-col px-5 pt-8 pb-10'>
 					<div className='flex h-11 items-center justify-between'>

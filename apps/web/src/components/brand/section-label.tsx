@@ -2,9 +2,9 @@ import { cn } from '@monocode-landing/ui/lib/utils'
 
 const tones = {
 	dark: {
-		root: 'border-move/25 text-move',
-		muted: 'text-move/45',
-		cursor: 'bg-move',
+		root: 'border-ink/25 text-ink',
+		muted: 'text-ink/45',
+		cursor: 'bg-ink',
 	},
 	light: {
 		root: 'border-soft/25 text-soft',

@@ -4,7 +4,7 @@ import { WordmarkOutline } from '@/components/brand/wordmark-outline'
 import { legalLinks, site } from '@/lib/site'
 
 const label = 'font-mono text-lime text-xs uppercase tracking-[0.08em]'
-const link = 'transition-colors hover:text-soft'
+const link = 'inline-block py-0.5 transition-colors hover:text-soft'
 
 export function SiteFooter() {
 	return (
@@ -12,16 +12,16 @@ export function SiteFooter() {
 			<div className='mx-auto max-w-[1440px] px-5 md:px-10 xl:px-20'>
 				<div className='grid gap-8 border-soft/20 border-t pt-8 sm:grid-cols-2 lg:grid-cols-4'>
 					<div className='flex flex-col gap-2.5' data-reveal='up'>
-						<span className={label}>Estúdio</span>
+						<span className={label}>Monocode</span>
 						<p className='leading-[1.6]'>
-							Estúdio de agentes de IA, automações e aplicações sob medida.
+							IA aplicada à operação de pequenas e médias empresas.
 							<br />
 							São Paulo, Brasil.
 						</p>
 					</div>
 					<div className='flex flex-col gap-2.5' data-reveal='up'>
 						<span className={label}>Contato</span>
-						<ul className='flex flex-col gap-1 leading-[1.6]'>
+						<ul className='flex flex-col leading-[1.6]'>
 							<li>
 								<a href={`mailto:${site.email}`} className={link}>
 									{site.email}
@@ -37,11 +37,21 @@ export function SiteFooter() {
 									LinkedIn
 								</a>
 							</li>
+							<li>
+								<a
+									href={site.instagramUrl}
+									target='_blank'
+									rel='noopener noreferrer'
+									className={link}
+								>
+									Instagram
+								</a>
+							</li>
 						</ul>
 					</div>
 					<div className='flex flex-col gap-2.5' data-reveal='up'>
 						<span className={label}>Legal</span>
-						<ul className='flex flex-col gap-1 leading-[1.6]'>
+						<ul className='flex flex-col leading-[1.6]'>
 							{legalLinks.map(l => (
 								<li key={l.href}>
 									<Link href={l.href} className={link}>

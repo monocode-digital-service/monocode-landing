@@ -2,14 +2,15 @@ import type { Metadata } from 'next'
 import Link from 'next/link'
 
 import { LegalPage } from '@/components/layout/legal-page'
+import { pageMetadata } from '@/lib/metadata'
 import { site } from '@/lib/site'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
 	title: 'Termos de uso',
 	description:
 		'Condições de uso do site da Monocode: conteúdo, propriedade intelectual e responsabilidades.',
-	alternates: { canonical: '/termos-de-uso' },
-}
+	path: '/termos-de-uso',
+})
 
 export default function TermosDeUso() {
 	return (

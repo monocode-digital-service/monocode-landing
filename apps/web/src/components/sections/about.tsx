@@ -7,18 +7,18 @@ import { site } from '@/lib/site'
 
 export function About() {
 	return (
-		<section id='sobre' className='relative isolate scroll-mt-4 text-move'>
-			<WaveBackground className='bg-[#dbe9dd]' bottom={false} />
+		<section id='sobre' className='relative isolate scroll-mt-4 text-ink'>
+			<WaveBackground className='bg-paper' bottom={false} />
 			{/* continua por baixo do fechamento: quando a onda dele afunda, aparece este tom e não o branco */}
 			<div
 				aria-hidden
-				className='absolute inset-x-0 top-full -z-10 h-[300px] bg-[#dbe9dd]'
+				className='absolute inset-x-0 top-full -z-10 h-[300px] bg-paper'
 			/>
 			<div className='mx-auto flex max-w-[1440px] flex-col gap-12 px-5 py-20 md:px-10 xl:px-20 xl:py-[120px]'>
 				<SectionLabel path='quem-esta-por-tras' />
 				<div className='flex flex-col gap-12 lg:flex-row lg:gap-[72px]'>
 					{/* cantoneiras por fora; no desktop a foto acompanha a altura do texto */}
-					<CornerFrame className='-m-2 w-[calc(100%+1rem)] max-w-[536px] shrink-0 p-2 text-move lg:w-[min(536px,42%)]'>
+					<CornerFrame className='-m-2 w-[calc(100%+1rem)] max-w-[536px] shrink-0 p-2 text-ink lg:w-[min(536px,42%)]'>
 						<div
 							data-reveal='wipe'
 							className='relative aspect-square lg:aspect-auto lg:h-full'

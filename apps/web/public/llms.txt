@@ -1,20 +1,26 @@
 # Monocode
 
-> Monocode é um estúdio de São Paulo que constrói agentes de IA, automações e aplicações sob medida para pequenas e médias empresas, ligados aos sistemas que a empresa já usa (WhatsApp, CRM, ERP, planilhas, Slack, Notion).
+> Monocode é uma empresa de São Paulo que coloca IA para trabalhar na operação de pequenas e médias empresas: entende a operação, constrói a solução (agentes de IA, automações, integrações e aplicações sob medida, ligados aos sistemas que a empresa já usa, como WhatsApp, CRM, ERP, planilhas, Slack e Notion) e continua junto depois da entrega.
 
 Fundada por Vanderson Arruda, engenheiro de software há 25 anos, com passagem por agências como JWT e Monks. Razão social: Monocode Digital Service Ltda, CNPJ 61.286.375/0001-54. Atende empresas no Brasil, com foco em São Paulo.
 
+## Duas frentes
+
+- Monocode Operations (eficiência e execução de processos): cuida dos processos que tomam o tempo do time, com agentes de IA, automações, integrações entre sistemas e aplicações sob medida. Exemplos: atendimento que responde com base nos documentos da empresa, dados que passam do CRM para o ERP sem redigitação, conteúdo escrito e avaliado por agentes com aprovação humana, respostas internas sobre contratos e políticas, aplicações para processos que não cabem em ferramenta pronta.
+- Monocode Growth (crescimento comercial com inteligência de mercado): pesquisa o mercado, mapeia empresas com o perfil do cliente e estrutura a prospecção B2B. Agentes qualificam cada contato antes de ele chegar ao time comercial.
+
 ## O que a Monocode constrói
 
-- Automações: o trabalho repetido roda sozinho, na regra que o time definiu. Distribuição de leads, follow-up, relatórios, sincronização entre CRM, ERP e planilhas.
-- Agentes de IA: aprendem sobre a empresa a partir de documentos, produtos e histórico, decidem o próximo passo e chamam uma pessoa quando precisa. Classificam contatos, produzem conteúdo no tom da marca e respondem ao time sobre contratos, estoque e políticas.
-- Aplicações sob medida: ferramentas internas, plataformas SaaS e primeiras versões de produto, com agentes de IA trabalhando dentro.
+- Automações: o trabalho repetido roda sozinho, na regra que o time definiu. CRM, ERP e planilha ficam sincronizados, sem redigitação.
+- Agentes de IA: conhecem a empresa, decidem o próximo passo e chamam uma pessoa quando precisa. Trabalham onde o time já está (Slack, Notion, WhatsApp, CRM), e o que sai para fora passa antes por uma pessoa.
+- Aplicações sob medida: ferramentas feitas para um processo específico, com agentes trabalhando dentro, ligadas aos sistemas que a empresa já usa.
 
 ## Como trabalha
 
-- Análise: estudo da operação, dos sistemas e dos dados, para apontar onde um agente ou uma automação resolve, e onde a IA não é necessária.
-- Proposta: escopo, investimento, cronograma e tratamento de dados por escrito.
-- Construção e evolução: entregas em etapas, demonstradas e testadas com o time do cliente, com uma pessoa aprovando o que a IA decide de importante.
+- Diagnóstico: estudo da operação, dos sistemas e dos dados, para apontar onde um agente ou uma automação resolve, e onde a IA não é necessária.
+- Proposta: escopo, investimento, cronograma, tratamento de dados e o que fica com a empresa, por escrito.
+- Construção: entregas em etapas, demonstradas e testadas com o time do cliente, com uma pessoa aprovando o que a IA decide de importante.
+- Evolução: a entrega não encerra o trabalho; a solução é acompanhada no dia a dia e ajustada conforme a empresa muda.
 
 ## Projeto
 
@@ -22,7 +28,7 @@ Fundada por Vanderson Arruda, engenheiro de software há 25 anos, com passagem p
 
 ## Páginas
 
-- [Página inicial](https://www.monocode.com.br/): soluções, método, projeto e fundador
+- [Página inicial](https://www.monocode.com.br/): o que muda com a IA em cada frente, soluções, método, projeto e fundador
 - [Política de privacidade](https://www.monocode.com.br/politica-de-privacidade)
 - [Termos de uso](https://www.monocode.com.br/termos-de-uso)
 
@@ -31,4 +37,5 @@ Fundada por Vanderson Arruda, engenheiro de software há 25 anos, com passagem p
 - WhatsApp: https://wa.me/5511920622056
 - E-mail: contato@monocode.com.br
 - LinkedIn: https://www.linkedin.com/company/monocode-brasil
+- Instagram: https://www.instagram.com/monocode_brasil
 - Portfólio do fundador: https://vanderson.com.br

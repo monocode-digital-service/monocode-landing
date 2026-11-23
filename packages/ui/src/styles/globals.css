@@ -7,62 +7,83 @@
 /* Sem modo escuro: a classe .dark nunca é aplicada */
 @custom-variant dark (&:is(.dark *));
 
-/* Monocode · paleta Signal Move */
+/* Monocode · paleta na proporção 60-30-10:
+   60 papel (soft no fundo das seções claras, paper nos cartões e na seção Sobre);
+   30 verde-escuro da marca (move, move-deep: hero, método, fechamento);
+   10 acentos (lime só sobre superfície escura: os blocos verde-escuros e os painéis ink e ink-deep, nunca
+   sobre o papel; orange para a aprovação humana e o destaque das ilustrações).
+   Nas seções claras o texto é ink, um quase-preto neutro: o verde fica para os blocos escuros.
+   ochre e petrol são cores de apoio, só dentro de elementos (selos e ilustrações), nunca em fundo ou texto.
+   Contrastes conferidos: ink 15:1 e ink-soft 5,9:1 sobre soft; ink 4,7:1 sobre orange; orange 3,4:1 sobre
+   soft (traço e foco, não texto); numeral 3,3:1 sobre soft (só em texto grande). */
 @theme {
 	--color-lime: #92ff5f;
 	--color-move: #0f3b27;
 	--color-move-deep: #0a2a1b;
-	--color-soft: #f7f9f7;
-	--color-orange: #ff7036;
-	--color-ice: #bff2f0;
-	--color-mint: #cff1d2;
-	--color-peach: #ffe8dd;
-	--color-ice-soft: #eafbfa;
-	--color-sage: #4d6b5c;
-	--color-line: #dce3dd;
+	--color-soft: #f6f4ef;
+	--color-paper: #fcfbf8;
+	--color-panel: #eae6dc;
+	--color-line: #dfdad0;
+	--color-tag: #e8e4da;
+	--color-ink: #171b18;
+	--color-ink-deep: #0e110f;
+	--color-ink-soft: #5c5f55;
+	--color-numeral: #898576;
+	--color-orange: #f1472b;
+	--color-ochre: #e6c06a;
+	--color-petrol: #a9cdd4;
 
 	--animate-caret: caret 1.1s steps(1) infinite;
+	/* Entrada de uma linha de exemplo (hero e painel das situações): só opacity e transform */
+	--animate-rise: rise 0.5s cubic-bezier(0.2, 0.7, 0.2, 1) both;
 
 	@keyframes caret {
 		50% {
 			opacity: 0;
 		}
 	}
+
+	@keyframes rise {
+		from {
+			opacity: 0;
+			transform: translateY(6px);
+		}
+	}
 }
 
 :root {
 	--background: var(--color-soft);
-	--foreground: var(--color-move);
-	--card: #ffffff;
-	--card-foreground: var(--color-move);
-	--popover: #ffffff;
-	--popover-foreground: var(--color-move);
+	--foreground: var(--color-ink);
+	--card: var(--color-paper);
+	--card-foreground: var(--color-ink);
+	--popover: var(--color-paper);
+	--popover-foreground: var(--color-ink);
 	--primary: var(--color-lime);
 	--primary-foreground: var(--color-move);
-	--secondary: var(--color-mint);
-	--secondary-foreground: var(--color-move);
-	--muted: var(--color-mint);
-	--muted-foreground: var(--color-sage);
-	--accent: var(--color-mint);
-	--accent-foreground: var(--color-move);
+	--secondary: var(--color-tag);
+	--secondary-foreground: var(--color-ink);
+	--muted: var(--color-tag);
+	--muted-foreground: var(--color-ink-soft);
+	--accent: var(--color-tag);
+	--accent-foreground: var(--color-ink);
 	--destructive: oklch(0.58 0.22 27);
-	--border: rgb(15 59 39 / 0.2);
-	--input: rgb(15 59 39 / 0.2);
-	--ring: var(--color-move);
+	--border: rgb(23 27 24 / 0.2);
+	--input: rgb(23 27 24 / 0.2);
+	--ring: var(--color-ink);
 	--chart-1: var(--color-lime);
 	--chart-2: var(--color-move);
 	--chart-3: var(--color-orange);
-	--chart-4: var(--color-ice);
-	--chart-5: var(--color-mint);
+	--chart-4: var(--color-petrol);
+	--chart-5: var(--color-ochre);
 	--radius: 0.375rem;
 	--sidebar: var(--color-soft);
-	--sidebar-foreground: var(--color-move);
+	--sidebar-foreground: var(--color-ink);
 	--sidebar-primary: var(--color-lime);
 	--sidebar-primary-foreground: var(--color-move);
-	--sidebar-accent: var(--color-mint);
-	--sidebar-accent-foreground: var(--color-move);
-	--sidebar-border: rgb(15 59 39 / 0.2);
-	--sidebar-ring: var(--color-move);
+	--sidebar-accent: var(--color-tag);
+	--sidebar-accent-foreground: var(--color-ink);
+	--sidebar-border: rgb(23 27 24 / 0.2);
+	--sidebar-ring: var(--color-ink);
 }
 
 @theme inline {
@@ -110,7 +131,7 @@
 
 /* Hachura diagonal bem clara (6px), para fundos de painéis de ilustração */
 @utility bg-hatch {
-	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Cpath d='M-1 1l2-2M0 6l6-6M5 7l2-2' stroke='%230f3b27' stroke-opacity='0.08' stroke-width='0.8'/%3E%3C/svg%3E");
+	background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='6' height='6'%3E%3Cpath d='M-1 1l2-2M0 6l6-6M5 7l2-2' stroke='%23171b18' stroke-opacity='0.08' stroke-width='0.8'/%3E%3C/svg%3E");
 }
 
 /* A mesma hachura, em linha lime bem apagada, para painéis escuros */
@@ -142,6 +163,65 @@
 		outline: 2px solid var(--color-orange);
 		outline-offset: 3px;
 	}
+	/* Seção que recebe o foco por um clique de âncora (smooth-scroll.tsx): o foco é só o ponto de partida
+	   do próximo Tab, então não leva o contorno em volta da seção inteira. */
+	section[tabindex="-1"]:focus-visible {
+		outline: none;
+	}
+}
+
+/* Ilustrações Hairline no tratamento "Volume": o traço acompanha a largura da figura (cqw), com piso para as pequenas.
+   O motor usa traço que não escala e seletores em :where(), então estas regras prevalecem sem !important.
+   Os preenchimentos em degradê entram por figura, em hairline-figure.tsx. */
+[data-hairline] {
+	container-type: inline-size;
+}
+/* Tons das figuras: "light" no painel claro de Soluções (peças creme sobre base em petróleo claro,
+   contorno ink), "dark" em Como trabalhamos (peças verdes, contorno lime). O destaque é sempre orange. */
+[data-hairline][data-tone="light"] {
+	--hairline-plate: #fffefb;
+	--hairline-edge: var(--color-ink);
+	--hairline-mid: #6b6f63;
+	--hairline-lo: #a9a99c;
+	--hairline-hi: var(--color-orange);
+	--hl-piece-top: #ffffff;
+	--hl-piece-bottom: #e6e0d2;
+	--hl-base-top: #bcd0d3;
+	--hl-base-bottom: #9dbac0;
+	--hl-shadow: rgb(40 38 30 / 0.2);
+}
+[data-hairline][data-tone="dark"] {
+	--hairline-plate: #14472f;
+	--hairline-edge: var(--color-lime);
+	--hairline-mid: #5fb26f;
+	--hairline-lo: #3a7d55;
+	--hairline-hi: var(--color-orange);
+	--hl-piece-top: #226b47;
+	--hl-piece-bottom: #0f3d29;
+	--hl-base-top: #0c2f20;
+	--hl-base-bottom: #081f15;
+	--hl-shadow: rgb(0 0 0 / 0.38);
+}
+[data-hairline] > svg :where(path, polygon, ellipse, line) {
+	stroke-width: clamp(1.1px, 0.28cqw, 2px);
+}
+[data-hairline] > svg .lo {
+	stroke-width: clamp(0.9px, 0.235cqw, 1.6px);
+}
+[data-hairline] > svg .sil {
+	stroke-width: clamp(1.5px, 0.41cqw, 2.8px);
+}
+[data-hairline] > svg .hi {
+	stroke-width: clamp(1.8px, 0.47cqw, 3.2px);
+}
+[data-hairline] > svg .dash {
+	stroke-dasharray: 2 4;
+}
+[data-hairline] > svg .dot {
+	stroke-width: 0;
+	transform-box: fill-box;
+	transform-origin: center;
+	transform: scale(1.3);
 }
 
 /* Elementos animados pelo SiteMotion: escondidos até o GSAP entrar, só quando há JS e movimento não está reduzido */

@@ -3,8 +3,11 @@ import { Geist_Mono, Manrope } from 'next/font/google'
 
 import '../index.css'
 
+import { BackToTop } from '@/components/layout/back-to-top'
+import { SiteHeader } from '@/components/layout/site-header'
 import { SiteMotion } from '@/components/layout/site-motion'
 import { SmoothScroll } from '@/components/layout/smooth-scroll'
+import { openGraphBase } from '@/lib/metadata'
 import { site } from '@/lib/site'
 
 const manrope = Manrope({
@@ -17,6 +20,23 @@ const geistMono = Geist_Mono({
 	subsets: ['latin'],
 })
 
+// Roda antes da primeira pintura e fica ativo pela vida do documento (o layout não remonta entre páginas):
+// - classe "js": o CSS esconde os elementos animados e fixa o cabeçalho só quando há JavaScript;
+// - data-scrolled (saiu do topo: o cabeçalho vira cápsula) e data-scrolled-far (passou da primeira dobra:
+//   aparece o botão de voltar ao topo), que o CSS lê pelas variantes in-data-scrolled: e in-data-scrolled-far:.
+// Fica aqui, e não num efeito do React, para valer já quando o navegador devolve a rolagem num recarregamento.
+const bootScript = `(() => {
+	const root = document.documentElement
+	root.classList.add('js')
+	const update = () => {
+		root.toggleAttribute('data-scrolled', scrollY > 24)
+		root.toggleAttribute('data-scrolled-far', scrollY > innerHeight * 0.8)
+	}
+	addEventListener('scroll', update, { passive: true })
+	addEventListener('resize', update)
+	update()
+})()`
+
 export const metadata: Metadata = {
 	metadataBase: new URL(site.url),
 	title: { default: site.title, template: `%s · ${site.name}` },
@@ -24,9 +44,7 @@ export const metadata: Metadata = {
 	applicationName: site.name,
 	alternates: { canonical: '/' },
 	openGraph: {
-		type: 'website',
-		locale: 'pt_BR',
-		siteName: site.name,
+		...openGraphBase,
 		url: '/',
 		title: site.title,
 		description: site.description,
@@ -42,14 +60,11 @@ export default function RootLayout({
 	return (
 		<html lang='pt-BR' suppressHydrationWarning>
 			<body className={`${manrope.variable} ${geistMono.variable} antialiased`}>
-				{/* marca que há JS antes da primeira pintura: o CSS esconde os elementos animados só nesse caso */}
-				<script
-					dangerouslySetInnerHTML={{
-						__html: "document.documentElement.classList.add('js')",
-					}}
-				/>
+				<script dangerouslySetInnerHTML={{ __html: bootScript }} />
 				<SmoothScroll />
+				<SiteHeader />
 				{children}
+				<BackToTop />
 				<SiteMotion />
 			</body>
 		</html>

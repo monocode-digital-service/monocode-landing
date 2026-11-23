@@ -56,3 +56,6 @@ coverage
 .cache
 tmp
 temp
+
+# Impeccable: cache local do gancho (a configuração em .impeccable/config.json é versionada)
+.impeccable/hook.cache.json

@@ -20,18 +20,18 @@ const flow = [
 // Fluxo do Movvai como slide da galeria
 function FlowSlide() {
 	return (
-		<div className='flex size-full flex-col justify-center bg-[#f5f8f5] bg-hatch px-6 py-8 sm:px-14'>
+		<div className='flex size-full flex-col justify-center bg-hatch px-6 py-8 [background-color:var(--color-panel)] sm:px-14'>
 			<ol className='flex flex-col'>
 				{flow.map((step, i) => (
 					<li key={step.title} className='flex flex-col items-center'>
-						{i > 0 && <span aria-hidden className='h-4 w-px bg-move/40' />}
+						{i > 0 && <span aria-hidden className='h-4 w-px bg-ink/40' />}
 						<div
 							className={cn(
-								'flex h-14 w-full items-center gap-5 border bg-white px-5 sm:gap-8',
+								'flex h-14 w-full items-center gap-5 rounded-md border bg-paper px-5 sm:gap-8',
 								'accent' in step ? 'border-orange' : 'border-line'
 							)}
 						>
-							<span className='font-semibold text-lg text-move/40'>
+							<span className='font-semibold text-ink/40 text-lg'>
 								{pad(i + 1)}
 							</span>
 							<span className='flex-1 font-bold text-sm uppercase tracking-[0.02em] sm:text-base'>
@@ -52,11 +52,11 @@ function Gallery({ project }: { project: ProjectData }) {
 	const media = project.media[index]
 	const go = (step: number) => setIndex(i => (i + step + total) % total)
 	const arrow =
-		'absolute top-1/2 z-10 flex size-12 -translate-y-1/2 items-center justify-center rounded-full border border-lime/50 bg-move/80 font-mono text-lg text-lime transition-colors hover:bg-move'
+		'absolute top-1/2 z-10 flex size-12 -translate-y-1/2 items-center justify-center rounded-full border border-lime/50 bg-ink/80 font-mono text-lg text-lime transition-colors hover:bg-ink'
 
 	return (
 		<figure data-reveal='scale' className='flex w-full flex-col gap-4'>
-			<CornerFrame className='overflow-hidden bg-move text-move lg:aspect-[16/10]'>
+			<CornerFrame className='overflow-hidden bg-ink text-ink lg:aspect-[16/10]'>
 				{media.kind === 'flow' && <FlowSlide />}
 				{media.kind === 'image' && (
 					<Image
@@ -100,10 +100,10 @@ function Gallery({ project }: { project: ProjectData }) {
 				)}
 			</CornerFrame>
 			{(media.caption || total > 1) && (
-				<figcaption className='flex justify-between gap-4 font-mono text-sage text-xs'>
+				<figcaption className='flex justify-between gap-4 font-mono text-ink-soft text-xs'>
 					<span>{media.caption}</span>
 					{total > 1 && (
-						<span className='text-move'>
+						<span className='text-ink'>
 							{pad(index + 1)} / {pad(total)}
 						</span>
 					)}
@@ -119,12 +119,12 @@ export function Project() {
 	const others = projects.filter((_, i) => i !== active)
 
 	return (
-		<section id='projeto' className='scroll-mt-4 bg-soft text-move'>
+		<section id='projeto' className='scroll-mt-4 bg-soft text-ink'>
 			<div className='mx-auto flex max-w-[1440px] flex-col gap-10 px-5 py-20 md:px-10 xl:px-20 xl:py-[120px]'>
 				<SectionLabel path='projetos' />
 
 				<article className='flex flex-col gap-7'>
-					<div className='flex justify-between font-mono text-[13px] text-sage'>
+					<div className='flex justify-between font-mono text-[13px] text-ink-soft'>
 						<span>
 							{pad(active + 1)} / {pad(projects.length)}
 						</span>
@@ -144,9 +144,9 @@ export function Project() {
 								{project.facts.map(f => (
 									<div
 										key={f.label}
-										className='flex gap-4 border-move/20 border-b py-2.5'
+										className='flex gap-4 border-ink/20 border-b py-2.5'
 									>
-										<dt className='w-[110px] font-mono text-[13px] text-sage uppercase tracking-[0.06em]'>
+										<dt className='w-[110px] font-mono text-[13px] text-ink-soft uppercase tracking-[0.06em]'>
 											{f.label}
 										</dt>
 										<dd className='font-semibold text-base'>{f.value}</dd>
@@ -155,7 +155,7 @@ export function Project() {
 							</dl>
 							<p
 								data-reveal='up'
-								className='text-base text-move/80 leading-[1.6]'
+								className='text-base text-ink/80 leading-[1.6]'
 							>
 								{project.body}
 							</p>
@@ -165,13 +165,13 @@ export function Project() {
 				</article>
 
 				{others.length > 0 && (
-					<ul className='border-move/25 border-b'>
+					<ul className='border-ink/25 border-b'>
 						{others.map(p => (
-							<li key={p.slug} className='border-move/25 border-t'>
+							<li key={p.slug} className='border-ink/25 border-t'>
 								<button
 									type='button'
 									onClick={() => setActive(projects.indexOf(p))}
-									className='flex w-full items-center gap-6 py-5 text-left transition-colors hover:bg-move/5'
+									className='flex w-full items-center gap-6 py-5 text-left transition-colors hover:bg-ink/5'
 								>
 									<span className='w-14 font-mono text-[13px]'>
 										{pad(projects.indexOf(p) + 1)}
@@ -179,7 +179,7 @@ export function Project() {
 									<span className='flex-1 font-semibold text-[22px]'>
 										{p.name}
 									</span>
-									<span className='hidden w-36 font-mono text-[13px] text-sage sm:block'>
+									<span className='hidden w-36 font-mono text-[13px] text-ink-soft sm:block'>
 										{p.type}
 									</span>
 									<span className='hidden w-40 md:block'>{p.client}</span>

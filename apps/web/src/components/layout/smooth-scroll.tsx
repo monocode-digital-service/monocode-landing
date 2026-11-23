@@ -25,6 +25,42 @@ export function SmoothScroll() {
 			fine.removeEventListener('change', update)
 		}
 	}, [])
+	// Clique numa âncora da própria página: o Lenis anima a rolagem, mas não cancela o salto nativo do
+	// navegador. Sem cancelar, a página pula para a âncora por um instante, o ScrollTrigger aplica o
+	// deslocamento final do parallax e o texto do hero pisca no topo antes de a animação começar.
+	// Aqui o salto é cancelado e o que ele faria além de rolar é refeito à mão: o # no endereço e o foco.
+	useEffect(() => {
+		if (!enabled) return
+		const onClick = (e: MouseEvent) => {
+			if (e.defaultPrevented || e.button !== 0) return
+			if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+			const link = (e.target as Element | null)?.closest?.('a[href*="#"]')
+			if (!(link instanceof HTMLAnchorElement) || link.target === '_blank')
+				return
+			const url = new URL(link.href)
+			if (url.origin !== location.origin || url.pathname !== location.pathname)
+				return
+			const target = document.getElementById(
+				decodeURIComponent(url.hash.slice(1))
+			)
+			if (!target) return
+			e.preventDefault()
+			// como no navegador: repetir o clique na âncora atual não empilha entradas iguais no histórico
+			if (url.hash !== location.hash)
+				history.pushState(
+					null,
+					'',
+					`${location.pathname}${location.search}${url.hash}`
+				)
+			// o salto nativo também levaria o foco para a seção; sem isso, o próximo Tab continuaria no menu
+			if (!target.hasAttribute('tabindex'))
+				target.setAttribute('tabindex', '-1')
+			target.focus({ preventScroll: true })
+		}
+		document.addEventListener('click', onClick)
+		return () => document.removeEventListener('click', onClick)
+	}, [enabled])
+
 	if (!enabled) return null
 	return (
 		<ReactLenis
