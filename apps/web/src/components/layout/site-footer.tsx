@@ -37,6 +37,16 @@ export function SiteFooter() {
 									LinkedIn
 								</a>
 							</li>
+							<li>
+								<a
+									href={site.instagramUrl}
+									target='_blank'
+									rel='noopener noreferrer'
+									className={link}
+								>
+									Instagram
+								</a>
+							</li>
 						</ul>
 					</div>
 					<div className='flex flex-col gap-2.5' data-reveal='up'>

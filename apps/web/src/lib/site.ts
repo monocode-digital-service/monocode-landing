@@ -8,6 +8,7 @@ export const site = {
 	email: 'contato@monocode.com.br',
 	portfolioUrl: 'https://vanderson.com.br',
 	linkedinUrl: 'https://www.linkedin.com/company/monocode-brasil',
+	instagramUrl: 'https://www.instagram.com/monocode_brasil',
 	founderLinkedinUrl: 'https://www.linkedin.com/in/vandersonarruda',
 	legalName: 'Monocode Digital Service Ltda',
 	cnpj: '61.286.375/0001-54',

@@ -24,7 +24,7 @@ export const homeJsonLd = {
 			},
 			areaServed: { '@type': 'Country', name: 'Brasil' },
 			founder: { '@id': `${site.url}/#founder` },
-			sameAs: [site.linkedinUrl],
+			sameAs: [site.linkedinUrl, site.instagramUrl],
 			knowsAbout: [
 				'Agentes de IA',
 				'Automação de processos com IA',
