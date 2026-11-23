@@ -30,13 +30,17 @@ export const homeJsonLd = {
 				'Automação de processos com IA',
 				'Integração de sistemas (CRM, ERP, WhatsApp, Slack, Notion)',
 				'Aplicações sob medida com IA',
+				'Prospecção B2B e inteligência de mercado com agentes de IA',
 			],
-			makesOffer: ['Automações', 'Agentes de IA', 'Aplicações sob medida'].map(
-				name => ({
-					'@type': 'Offer',
-					itemOffered: { '@type': 'Service', name, areaServed: 'BR' },
-				})
-			),
+			makesOffer: [
+				'Automações',
+				'Agentes de IA',
+				'Aplicações sob medida',
+				'Prospecção B2B e inteligência de mercado',
+			].map(name => ({
+				'@type': 'Offer',
+				itemOffered: { '@type': 'Service', name, areaServed: 'BR' },
+			})),
 		},
 		{
 			'@type': 'WebSite',

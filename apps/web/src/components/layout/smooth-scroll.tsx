@@ -25,6 +25,34 @@ export function SmoothScroll() {
 			fine.removeEventListener('change', update)
 		}
 	}, [])
+	// Clique numa âncora da própria página: o Lenis anima a rolagem, mas não cancela o salto nativo do
+	// navegador. Sem cancelar, a página pula para a âncora por um instante, o ScrollTrigger aplica o
+	// deslocamento final do parallax e o texto do hero pisca no topo antes de a animação começar.
+	// Aqui o salto é cancelado e o endereço recebe o #, como no comportamento nativo.
+	useEffect(() => {
+		if (!enabled) return
+		const onClick = (e: MouseEvent) => {
+			if (e.defaultPrevented || e.button !== 0) return
+			if (e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return
+			const link = (e.target as Element | null)?.closest?.('a[href*="#"]')
+			if (!(link instanceof HTMLAnchorElement) || link.target === '_blank')
+				return
+			const url = new URL(link.href)
+			if (url.origin !== location.origin || url.pathname !== location.pathname)
+				return
+			if (!document.getElementById(decodeURIComponent(url.hash.slice(1))))
+				return
+			e.preventDefault()
+			history.pushState(
+				null,
+				'',
+				`${location.pathname}${location.search}${url.hash}`
+			)
+		}
+		document.addEventListener('click', onClick)
+		return () => document.removeEventListener('click', onClick)
+	}, [enabled])
+
 	if (!enabled) return null
 	return (
 		<ReactLenis

@@ -5,6 +5,7 @@ import '../index.css'
 
 import { SiteMotion } from '@/components/layout/site-motion'
 import { SmoothScroll } from '@/components/layout/smooth-scroll'
+import { openGraphBase } from '@/lib/metadata'
 import { site } from '@/lib/site'
 
 const manrope = Manrope({
@@ -24,9 +25,7 @@ export const metadata: Metadata = {
 	applicationName: site.name,
 	alternates: { canonical: '/' },
 	openGraph: {
-		type: 'website',
-		locale: 'pt_BR',
-		siteName: site.name,
+		...openGraphBase,
 		url: '/',
 		title: site.title,
 		description: site.description,

@@ -3,7 +3,7 @@ export const site = {
 	url: 'https://www.monocode.com.br',
 	title: 'Agentes de IA e automação para empresas · Monocode',
 	description:
-		'Estúdio em São Paulo que cria agentes de IA, automações e aplicações sob medida, ligados aos sistemas que a sua empresa já usa. Fale pelo WhatsApp.',
+		'Colocamos a IA para trabalhar na sua empresa: agentes de IA, automações e aplicações sob medida, ligados aos sistemas que você já usa. São Paulo.',
 	whatsappUrl: 'https://wa.me/5511920622056',
 	email: 'contato@monocode.com.br',
 	portfolioUrl: 'https://vanderson.com.br',
@@ -14,7 +14,8 @@ export const site = {
 } as const
 
 export const navLinks = [
-	{ href: '/#solucoes', label: 'Soluções' },
+	// "Soluções" começa pelas situações (o que muda) e segue para o que construímos
+	{ href: '/#o-que-muda', label: 'Soluções' },
 	{ href: '/#metodo', label: 'Método' },
 	{ href: '/#projeto', label: 'Projeto' },
 	{ href: '/#sobre', label: 'Sobre' },

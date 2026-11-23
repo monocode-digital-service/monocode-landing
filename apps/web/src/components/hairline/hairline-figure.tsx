@@ -1,7 +1,7 @@
 'use client'
 
 import { cn } from '@monocode-landing/ui/lib/utils'
-import { useEffect, useRef } from 'react'
+import { useEffect, useId, useRef } from 'react'
 
 // Motor e figuras só são baixados quando o palco se aproxima da tela
 const figures = {
@@ -11,27 +11,31 @@ const figures = {
 	raiox: () => import('./figures/raiox'),
 	pasta: () => import('./figures/pasta'),
 	esteira: () => import('./figures/esteira'),
+	evolucao: () => import('./figures/evolucao'),
 } as const
 
-// Paletas: "light" para o painel claro de Soluções, "dark" para Como trabalhamos
-const palettes = {
-	light: {
-		'--hairline-plate': '#f5f8f5',
-		'--hairline-edge': '#0f3b27',
-		'--hairline-mid': '#8fa597',
-		'--hairline-lo': '#cfdcd3',
-		'--hairline-hi': '#ff7036',
-		'--hairline-stroke': '1.2',
-	},
-	dark: {
-		'--hairline-plate': '#0f3b27',
-		'--hairline-edge': '#92ff5f',
-		'--hairline-mid': '#4f9a5f',
-		'--hairline-lo': '#2b6443',
-		'--hairline-hi': '#ff7036',
-		'--hairline-stroke': '1.2',
-	},
-} as Record<'light' | 'dark', React.CSSProperties>
+const stop = (offset: number, color: string) =>
+	`<stop offset="${offset}" style="stop-color:var(${color})"/>`
+const gradient = (id: string, from: string, to: string) =>
+	`<linearGradient id="${id}" x1="0" y1="0" x2="0" y2="1">${stop(0, from)}${stop(1, to)}</linearGradient>`
+
+/**
+ * Tratamento "Volume": cada peça recebe um degradê de cima para baixo, a base um tom próprio
+ * e o desenho inteiro projeta uma sombra suave no painel. As cores vêm das variáveis --hl-* e --hairline-*
+ * do globals.css, por tom ("light" ou "dark") e por paleta; a espessura do traço também fica lá.
+ * Os degradês e as regras de preenchimento vão dentro do próprio SVG (e não no CSS global) porque
+ * url(#id) numa folha externa não aponta para o documento em todo navegador.
+ *
+ * Só recebe preenchimento o que o motor já preenche: os contornos abertos (classe "nf", como a moldura do
+ * scanner ou a parede da frente da pasta) ficam de fora, senão o navegador fecha a forma com uma reta.
+ * A base é o primeiro sólido que a figura desenha; a pasta não tem base, então a caixa faz esse papel.
+ */
+const baseSelector = (id: string, name: string) =>
+	name === 'pasta'
+		? `#${id}>g>path.sil:not(.nf),#${id}>g>path.fo`
+		: `#${id}>g>g:first-of-type>.sil:not(.nf)`
+const volumeMarkup = (id: string, name: string) =>
+	`<defs>${gradient(`${id}-piece`, '--hl-piece-top', '--hl-piece-bottom')}${gradient(`${id}-base`, '--hl-base-top', '--hl-base-bottom')}</defs><style>#${id} .sil:not(.nf){fill:url(#${id}-piece)}${baseSelector(id, name)}{fill:url(#${id}-base)}#${id}>g{filter:drop-shadow(0 14px 12px var(--hl-shadow))}</style>`
 
 /** Monta uma figura Hairline (motor + figura em design/hairline) num palco SVG. */
 export function HairlineFigure({
@@ -42,10 +46,12 @@ export function HairlineFigure({
 }: {
 	name: keyof typeof figures
 	label: string
-	palette?: keyof typeof palettes
+	/** "light" para o painel claro de Soluções, "dark" para Como trabalhamos */
+	palette?: 'light' | 'dark'
 	className?: string
 }) {
 	const stage = useRef<HTMLDivElement>(null)
+	const id = `hl${useId().replace(/[^a-zA-Z0-9]/g, '')}`
 
 	useEffect(() => {
 		const el = stage.current
@@ -64,9 +70,10 @@ export function HairlineFigure({
 				HL.inject(document)
 				const svg = HL.mk(
 					'svg',
-					{ viewBox: '0 0 400 320', 'aria-hidden': 'true' },
+					{ viewBox: '0 0 400 320', 'aria-hidden': 'true', id },
 					el
 				)
+				svg.insertAdjacentHTML('afterbegin', volumeMarkup(id, name))
 				const handle = figure.mount(
 					{ stage: el, svg, read: { textContent: '' } },
 					figure.range[1]
@@ -84,16 +91,16 @@ export function HairlineFigure({
 			io.disconnect()
 			cleanup()
 		}
-	}, [name])
+	}, [name, id])
 
 	return (
 		<div
 			ref={stage}
 			data-hairline={name}
+			data-tone={palette}
 			role='img'
 			aria-label={label}
 			className={cn('w-full', className)}
-			style={palettes[palette]}
 		/>
 	)
 }

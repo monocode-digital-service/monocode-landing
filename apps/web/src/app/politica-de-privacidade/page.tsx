@@ -1,14 +1,15 @@
 import type { Metadata } from 'next'
 
 import { LegalPage } from '@/components/layout/legal-page'
+import { pageMetadata } from '@/lib/metadata'
 import { site } from '@/lib/site'
 
-export const metadata: Metadata = {
+export const metadata: Metadata = pageMetadata({
 	title: 'Política de privacidade',
 	description:
 		'Como a Monocode trata os dados pessoais de quem visita o site e entra em contato, conforme a LGPD.',
-	alternates: { canonical: '/politica-de-privacidade' },
-}
+	path: '/politica-de-privacidade',
+})
 
 const mail = <a href={`mailto:${site.email}`}>{site.email}</a>
 
