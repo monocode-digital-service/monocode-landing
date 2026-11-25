@@ -7,6 +7,7 @@ import { BackToTop } from '@/components/layout/back-to-top'
 import { SiteHeader } from '@/components/layout/site-header'
 import { SiteMotion } from '@/components/layout/site-motion'
 import { SmoothScroll } from '@/components/layout/smooth-scroll'
+import { ENV } from '@/env'
 import { openGraphBase } from '@/lib/metadata'
 import { site } from '@/lib/site'
 
@@ -66,6 +67,17 @@ export default function RootLayout({
 				{children}
 				<BackToTop />
 				<SiteMotion />
+				{/* Medição de audiência (Cloudflare Web Analytics, sem cookies). O site não passa pelo proxy da
+				    Cloudflare, então o script entra à mão, no formato que ela documenta, e só quando há token. */}
+				{ENV.CLOUDFLARE_BEACON_TOKEN && (
+					<script
+						defer
+						src='https://static.cloudflareinsights.com/beacon.min.js'
+						data-cf-beacon={JSON.stringify({
+							token: ENV.CLOUDFLARE_BEACON_TOKEN,
+						})}
+					/>
+				)}
 			</body>
 		</html>
 	)
